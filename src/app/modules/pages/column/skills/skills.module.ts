@@ -1,28 +1,27 @@
 import { NgModule } from '@angular/core';
 
-import { WelcomeComponent } from './welcome.component';
+import { SkillsRoutingModule } from './skills-routing.module';
+
+import { SkillsComponent } from './skills.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { WelcomeRoutingModule } from './welcome-routing.module';
 import { NzImageModule } from 'ng-zorro-antd/image';
 
 @NgModule({
   imports: 
   [
-    WelcomeRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    NzLayoutModule,
-    NzMenuModule,
+    SkillsRoutingModule,
+    FormsModule, 
     NzIconModule,
     NzLayoutModule,
     NzMenuModule,
+    HttpClientModule,
     NzImageModule
   ],
-  declarations: [WelcomeComponent],
-  exports: [WelcomeComponent]
+  declarations: [ SkillsComponent],
+  exports: [ SkillsComponent]
 })
-export class WelcomeModule { }
+export class SkillsModule { }
