@@ -8,6 +8,9 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { WelcomeRoutingModule } from './welcome-routing.module';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 @NgModule({
   imports: 
@@ -20,7 +23,10 @@ import { NzImageModule } from 'ng-zorro-antd/image';
     NzIconModule,
     NzLayoutModule,
     NzMenuModule,
-    NzImageModule
+    NzImageModule,
+    NzInputModule,
+    NzFormModule,
+    NzPaginationModule
   ],
   declarations: [WelcomeComponent],
   exports: [WelcomeComponent]
