@@ -20,6 +20,7 @@ export class ExperienceComponent implements OnInit {
   inputGroup!: UntypedFormGroup;
 
   startEdit(id: string): void {
+    this.updateEditCache();
     this.editCache[id].edit = true;
   }
 
