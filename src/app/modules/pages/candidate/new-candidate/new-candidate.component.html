@@ -1,1 +1,20 @@
-<p>new-candidate works!</p>
+<form nz-form [formGroup]="newCandidateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+        <nz-form-label nzRequired nzFor="Name">Candidate Name</nz-form-label>
+        <nz-form-control [nzLg]="6">
+            <input nz-input formControlName="Name" id="Name" />
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label nzFor="Gender">Gender</nz-form-label>
+        <nz-form-control [nzLg]="6">
+            <nz-cascader nz-input formControlName="Gender" id="Gender" [nzOptions]="genderOptions" [(ngModel)]="values" (ngModelChange)="onChanges($event)" />
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label nzFor="InterviewDate">Interview Date</nz-form-label>
+        <nz-form-control [nzLg]="6">
+            <nz-date-picker nz-input />
+        </nz-form-control>
+    </nz-form-item>
+</form>

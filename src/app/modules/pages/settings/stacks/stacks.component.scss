@@ -101,13 +101,23 @@ nz-content {
 
 .save{
   margin-right: 10%;
-  margin-left: 10%;
+  margin-left: auto;
 }
+
 
 .save-original{
   margin-left: 35%;
 }
 
 .edit{
-  margin-left: 35%;
+  margin: auto;
+}
+
+.delete{
+  margin: auto;
+}
+
+.data-table{
+  margin: auto;
+  width: 50%;
 }

@@ -13,6 +13,15 @@ const routes: Routes = [
     },
     {
       path:'experience', loadChildren: () => import('../settings/experience/experience.module').then(m => m.ExperienceModule)
+    },
+    {
+      path:'new_candidate', loadChildren: () => import('../candidate/new-candidate/new-candidate.module').then(m => m.NewCandidateModule)
+    },
+    {
+      path:'interview', loadChildren: () => import('../candidate/interview/interview.module').then(m => m.InterviewModule)
+    },
+    {
+      path:'candidate-list', loadChildren: () => import('../candidate/candidate-list/candidate-list.module').then(m => m.CandidateListModule)
     }
   ]  },
 ];

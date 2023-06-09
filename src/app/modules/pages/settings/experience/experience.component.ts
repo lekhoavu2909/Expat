@@ -67,7 +67,6 @@ export class ExperienceComponent implements OnInit {
         data: { ...item }
       };
     });
-    console.log(this.i)
   }
 
   deleteRow(id: string): void {
