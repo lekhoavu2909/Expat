@@ -4,8 +4,6 @@ import { UntypedFormBuilder, UntypedFormGroup,  } from '@angular/forms';
 interface ItemData {
   id: string;
   name: string;
-  age: number;
-  address: string;
 }
 @Component({
   selector: 'app-stacks',
@@ -46,16 +44,12 @@ export class StacksComponent implements OnInit {
       {
         id: `${this.i}`,
         name: this.inputGroup.value['name'],
-        age: this.inputGroup.value['age'],
-        address: this.inputGroup.value['address']
       }
     ];
     this.i++;
     this.updateEditCache();
     this.inputGroup = this.fb.group({
       name: [null],
-      age:[null],
-      address: [null],
     });
   }
 
@@ -78,17 +72,13 @@ export class StacksComponent implements OnInit {
     for (let i = 0; i < 0; i++) {
       data.push({
         id: `${this.i}`,
-        name: ``,
-        age: 0,
-        address: ``
+        name: ``
       });
     }
     this.listOfData = data;
     this.updateEditCache();
     this.inputGroup = this.fb.group({
-      name: [null],
-      age:[null],
-      address: [null],
+      name: [null]
     });
   }
 }

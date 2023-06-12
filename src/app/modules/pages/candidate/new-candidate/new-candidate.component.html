@@ -1,20 +1,94 @@
-<form nz-form [formGroup]="newCandidateForm" (ngSubmit)="submitForm()">
-    <nz-form-item>
-        <nz-form-label nzRequired nzFor="Name">Candidate Name</nz-form-label>
-        <nz-form-control [nzLg]="6">
-            <input nz-input formControlName="Name" id="Name" />
+<form nz-form [formGroup]="newCandidateForm">
+    <nz-row>
+        <nz-col nzSpan="10">
+            <nz-form-item>
+                <nz-form-label  [nzSm]="12" [nzXs]="32" nzRequired nzFor="Name">Candidate Name</nz-form-label>
+                <nz-form-control [nzSm]="20" [nzXs]="32">
+                    <input nz-input nzAllowClear formControlName="Name" id="Name" placeholder="Candidate Name"/>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label  [nzSm]="12" [nzXs]="32" nzFor="Gender">Gender</nz-form-label>
+                <nz-form-control [nzSm]="20" [nzXs]="32">
+                    <nz-cascader nz-input nzAllowClear formControlName="Gender" id="Gender" [nzOptions]="genderOptions" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label  [nzSm]="12" [nzXs]="32" nzFor="InterviewDate">Interview Date</nz-form-label>
+                <nz-form-control [nzSm]="20" [nzXs]="32">
+                    <nz-date-picker nz-input  formControlName="InterviewDate"/>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label  [nzSm]="12" [nzXs]="32" nzFor="Stack">Stack</nz-form-label>
+                <nz-form-control [nzSm]="20" [nzXs]="32">
+                    <nz-cascader nz-input nzAllowClear formControlName="Stack" id="Stack" [nzOptions]="stackOptions" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label  [nzSm]="12" [nzXs]="32" nzFor="Skills">Skills</nz-form-label>
+                <nz-form-control [nzSm]="20" [nzXs]="32">
+                    <nz-tree-select
+                        nz-input
+                        [nzNodes]="skillNodes"
+                        nzShowSearch
+                        nzCheckable
+                        nzAllowClear
+                        nzPlaceHolder="Please select"
+                        formControlName="Skills"
+                        id="Skills"
+                        />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label  [nzSm]="12" [nzXs]="32" nzFor="Experience">Experience</nz-form-label>
+                <nz-form-control [nzSm]="20" [nzXs]="32">
+                    <nz-cascader nz-input nzAllowClear formControlName="Experience" id="Experience" [nzOptions]="experienceOptions" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label  [nzSm]="12" [nzXs]="32" nzFor="Note">Note</nz-form-label>
+                <nz-form-control [nzSm]="20" [nzXs]="32">
+                    <textarea nz-input nzAllowClear formControlName="Note" id="Note" placeholder="Notes" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>        
+                </nz-form-control>
+            </nz-form-item>
+        </nz-col>
+        <nz-col nzSpan="10">
+            <nz-form-item>
+                <nz-form-label  [nzSm]="12" [nzXs]="32" nzFor="HighlightsInfo">Highlights</nz-form-label>
+                <nz-form-control [nzSm]="20" [nzXs]="32">
+                    <textarea nz-input nzAllowClear formControlName="HighlightsInfo" id="HighlightsInfo" placeholder="Highlights Info" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>        
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label  [nzSm]="12" [nzXs]="32" nzFor="SoftSkills">Soft Skills</nz-form-label>
+                <nz-form-control [nzSm]="20" [nzXs]="32">
+                    <textarea nz-input nzAllowClear formControlName="SoftSkills" id="SoftSkills" placeholder="Soft Skills" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>        
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label  [nzSm]="12" [nzXs]="32" nzRequired nzFor="QuizScore">Quiz Score</nz-form-label>
+                <nz-form-control [nzSm]="20" [nzXs]="32">
+                    <input nz-input nzAllowClear formControlName="QuizScore" id="QuizScore" placeholder="Quiz Score"/>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label  [nzSm]="12" [nzXs]="32" nzRequired nzFor="IsRecommended">Is Recommended?</nz-form-label>
+                <nz-form-control [nzSm]="20" [nzXs]="32">
+                    <label nz-checkbox formControlName="IsRecommended" id="IsRecommended"></label>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label  [nzSm]="12" [nzXs]="32" nzFor="RankNote">Rank Note</nz-form-label>
+                <nz-form-control [nzSm]="20" [nzXs]="32">
+                    <input nz-input nzAllowClear formControlName="RankNote" id="RankNote" placeholder="Rank Note" />
+                </nz-form-control>
+            </nz-form-item>
+        </nz-col>
+    </nz-row>
+    <a>
+        <nz-form-control [nzSpan]="12" [nzOffset]="5">
+            <button nz-button class="login-form-button" (click)="submitForm()">Submit</button> <!-- [nzType]="'primary'"-->
         </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-        <nz-form-label nzFor="Gender">Gender</nz-form-label>
-        <nz-form-control [nzLg]="6">
-            <nz-cascader nz-input formControlName="Gender" id="Gender" [nzOptions]="genderOptions" [(ngModel)]="values" (ngModelChange)="onChanges($event)" />
-        </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-        <nz-form-label nzFor="InterviewDate">Interview Date</nz-form-label>
-        <nz-form-control [nzLg]="6">
-            <nz-date-picker nz-input />
-        </nz-form-control>
-    </nz-form-item>
+    </a>
 </form>
