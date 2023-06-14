@@ -1,0 +1,20 @@
+
+      .login-form {
+        padding-top: 20%;
+        padding-bottom: 20%;
+        max-width:75%;
+        padding-left: 25%;
+      }
+
+      .login-form-forgot {
+        float: right;
+      }
+
+      .login-form-button {
+        width: 100%;
+      }
+
+      nz-row {
+        padding-top: 5%;
+      }
+    

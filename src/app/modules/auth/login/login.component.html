@@ -1,0 +1,33 @@
+<nz-row>
+  <div nz-col nzSpan="12">
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your username!">
+          <nz-input-group nzPrefixIcon="user">
+            <input type="text" nz-input formControlName="userName" placeholder="Username" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Password!">
+         <nz-input-group nzPrefixIcon="lock">
+            <input type="password" nz-input formControlName="password" placeholder="Password" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <a >
+        <button nz-button class="login-form-button" >Log in</button> <!-- [nzType]="'primary'"-->
+      </a>
+      Or
+      <a routerLink="/signup">register now!</a>
+    </form>
+  </div>
+  <div nz-col nzSpan="12">
+    <img
+        nz-image
+        width="100%"
+        nzSrc="https://static.theceomagazine.net/wp-content/uploads/2023/01/05110108/expat.jpg"
+        alt="img"
+      />
+  </div>
+</nz-row>

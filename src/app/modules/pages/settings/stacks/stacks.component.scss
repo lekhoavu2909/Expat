@@ -70,7 +70,54 @@ nz-header {
 }
 
 nz-content {
-  margin-top: 24px;
-  margin-left: 24px;
-  overflow: scroll;
+  margin: 24px;
+}
+
+.settings-add {
+  width: 100%;
+}
+
+.settings-form{
+  width: 100%;
+}
+
+.editable-cell {
+  position: relative;
+  padding: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.action-button {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.editable-row:hover .editable-cell {
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 4px 11px;
+}
+
+.save{
+  margin-right: 10%;
+  margin-left: auto;
+}
+
+
+.save-original{
+  margin-left: 35%;
+}
+
+.edit{
+  margin: auto;
+}
+
+.delete{
+  margin: auto;
+}
+
+.data-table{
+  margin: auto;
+  width: 50%;
 }
