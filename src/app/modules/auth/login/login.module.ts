@@ -11,10 +11,11 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
 @NgModule({
   imports: 
   [
+    NzLayoutModule,
     NzButtonModule,
     NzTypographyModule,
     NzGridModule,
