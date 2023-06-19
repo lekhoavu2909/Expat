@@ -1,1 +1,24 @@
 <p>forgot works!</p>
+<nz-row>
+    <nz-col nzSpan="8" nzOffset="8">
+        <form nz-form [formGroup]="forgotForm" class="forgot-form" (ngSubmit)="submitForm()">
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please input your email!">
+                <nz-input-group nzPrefixIcon="mail">
+                  <input type="text" required nz-input formControlName="email" placeholder="Email" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-control nzErrorTip="Please input your new valid password!">
+                  <nz-input-group nzPrefixIcon="lock">
+                    <input type="password" required nz-input formControlName="newPassword" placeholder="New password" />
+                  </nz-input-group>
+                </nz-form-control>
+              </nz-form-item>
+            <a>
+              <button nz-button (click)="submitForm()" class="login-form-button" >Submit</button> <!-- [nzType]="'primary'"-->
+            </a>
+        </form>
+    </nz-col>
+</nz-row>

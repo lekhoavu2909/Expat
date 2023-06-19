@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: 
@@ -16,7 +18,9 @@ import { NzImageModule } from 'ng-zorro-antd/image';
     FormsModule, 
     NzFormModule,
     NzInputModule,
-    NzImageModule
+    NzImageModule,
+    CommonModule,
+    HttpClientModule
   ],
   declarations: [ForgotComponent],
   exports: [ForgotComponent]
