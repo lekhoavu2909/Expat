@@ -1,7 +1,51 @@
-.forgot-form{
-    margin: auto;
+.forgot-background{
+    background-image: url(../../../../img/myhq-workspaces-NEFgreoVtig-unsplash.jpg);
+    background-repeat: no-repeat;
+    max-height: 100%;
+    max-width: 100%;
+    background-color: white;
+    background-size: cover;
+    padding-top: 15%;
+    padding-bottom: 15%;
+
 }
 
-.login-form-button {
+.forgot-container{
+    margin-left: 20%;
+    margin-right: 20%;
+    max-height: 100%;
+}
+
+nz-card{
+    opacity: 0.95;
+}
+
+.forgot-header{
+    text-align: center;
     width: 100%;
-  }
+    opacity: 100%;
+}
+
+.forgot-form {
+    opacity: 100%;
+    display: inline-block;
+    text-align: center;
+    padding-top: 10%;
+    margin-bottom: 10%;
+    width: 100%;
+}
+
+.forgot-input{
+    border-radius: 0.5em;
+    margin-bottom: 5%;
+}
+
+.forgot-form-button {
+    width: 100%;
+    border-radius: 0.5em;
+    margin-bottom: 3%;
+}
+
+nz-row {
+    padding-top: 5%;
+}

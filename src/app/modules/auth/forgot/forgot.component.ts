@@ -1,8 +1,8 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Environment } from 'environment';
+import { Observable, takeUntil } from 'rxjs';
+import { UnsubscriptionComponent } from '../../unsubscription.component';
 
 export interface Post {
   "email": string,
@@ -15,29 +15,30 @@ export interface Post {
   styleUrls: ['./forgot.component.scss']
 })
 
+@Injectable({
+  providedIn: 'root'
+})
 
-export class ForgotComponent implements OnInit{
+export class ForgotComponent extends UnsubscriptionComponent implements OnInit{
   forgotForm !: UntypedFormGroup
-  posts: Observable<any> | undefined;
+  ROOT_URL = 'https://expat-api.azurewebsites.net';
   
-  constructor(private fb: UntypedFormBuilder, private http: HttpClient,) {}
+  constructor(private fb: UntypedFormBuilder, private http: HttpClient,) {
+    super();
+  }
 
-  submitForm(): void {
-    console.log(Environment.ROOT_URL)
+  submitForm() {
     if (this.forgotForm.valid) {
       console.log('submit', this.forgotForm.value);
     }
-    const data: Post = {
-      "email": this.forgotForm.value['email'],
-      "newPassword": this.forgotForm.value['newPassword']
-    } 
-    this.http.post(Environment.ROOT_URL, data, {
-      headers : new HttpHeaders({
-        "Access-Control-Allow-Origin":"*"
-      })
-    }).subscribe(responseData => {
-            console.log(responseData);
-        })
+    const data: Post = this.forgotForm.value
+    this.http.post(this.ROOT_URL + '/api/Account/ResetPassword' , data)
+    .pipe(
+      takeUntil(this.destroy$)
+    )
+    .subscribe(responseData => {
+      console.log(responseData);
+    })
   }
   
   ngOnInit(): void {

@@ -1,24 +1,30 @@
-<p>forgot works!</p>
-<nz-row>
-    <nz-col nzSpan="8" nzOffset="8">
-        <form nz-form [formGroup]="forgotForm" class="forgot-form" (ngSubmit)="submitForm()">
+<div nz-col [nzXs]="{ span: 20, offset: 1 }" [nzLg]="{ span: 20, offset: 2 }">
+  <div class="forgot-background">
+    <nz-card class="forgot-container">
+      <nz-row nzJustify="center">
+        <div nzSpan="12">
+          <h3 class="forgot-header" nz-typography>Reset Password</h3>
+          <form nz-form [formGroup]="forgotForm" class="forgot-form">
             <nz-form-item>
               <nz-form-control nzErrorTip="Please input your email!">
-                <nz-input-group nzPrefixIcon="mail">
+                <nz-input-group class="forgot-input" nzPrefixIcon="mail">
                   <input type="text" required nz-input formControlName="email" placeholder="Email" />
                 </nz-input-group>
               </nz-form-control>
             </nz-form-item>
             <nz-form-item>
-                <nz-form-control nzErrorTip="Please input your new valid password!">
-                  <nz-input-group nzPrefixIcon="lock">
-                    <input type="password" required nz-input formControlName="newPassword" placeholder="New password" />
-                  </nz-input-group>
-                </nz-form-control>
-              </nz-form-item>
+              <nz-form-control nzErrorTip="Please input your new valid password!">
+                <nz-input-group class="forgot-input" nzPrefixIcon="lock">
+                  <input type="password" required nz-input formControlName="newPassword" placeholder="New password" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
             <a>
-              <button nz-button (click)="submitForm()" class="login-form-button" >Submit</button> <!-- [nzType]="'primary'"-->
+              <button nz-button (click)="submitForm()" class="forgot-form-button" >Submit</button> <!-- [nzType]="'primary'"-->
             </a>
-        </form>
-    </nz-col>
-</nz-row>
+          </form>      
+        </div>
+      </nz-row>
+    </nz-card>
+  </div>  
+</div>

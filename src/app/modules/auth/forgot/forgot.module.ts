@@ -9,6 +9,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 @NgModule({
   imports: 
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     NzInputModule,
     NzImageModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    NzCardModule
   ],
   declarations: [ForgotComponent],
   exports: [ForgotComponent]
