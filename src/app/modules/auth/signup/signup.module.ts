@@ -8,10 +8,12 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: 
   [
+    CommonModule,
     SignupRoutingModule, 
     ReactiveFormsModule, 
     FormsModule, 
