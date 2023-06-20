@@ -23,11 +23,11 @@ export class LoginComponent implements OnInit {
   }
 
   submitForm(): void {
-    if (this.validateForm.valid) { 
+    if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
       const loginData = this.validateForm.value;
       this.accService.loginForm(loginData)
-      // this.route.navigate(['./welcome'])
+      this.route.navigate(['./welcome'])
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {

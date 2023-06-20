@@ -46,7 +46,7 @@ export class SignupComponent implements OnInit {
           Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/),
         ],
       ],
-      checkPassword: [null, [Validators.required, this.confirmationValidator]]
+      checkPassword: [null, [Validators.required, this.confirmationValidator]],
     });
   }
 
@@ -55,7 +55,7 @@ export class SignupComponent implements OnInit {
       const signupData = this.validateForm.value;
       this.accService.signUpForm(signupData);
       console.log('submit', signupData);
-      // this.route.navigate(['./login'])
+      this.route.navigate(['./login']);
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {

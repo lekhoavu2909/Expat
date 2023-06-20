@@ -20,6 +20,10 @@
   opacity: 0.95;
 }
 
+.signup_col {
+  margin: 5%;
+}
+
 .signup-header {
   padding-top: 8%;
   text-align: center;
@@ -28,23 +32,47 @@
 }
 
 [nz-form] {
+
+}
+
+.form-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   padding-top: 5%;
-  padding-bottom: 10%;
   max-width: 75%;
-  padding-left: 25%;
+  margin-left: 13%;
   text-align: center;
 }
 
+.ng-star-inserted{
+  color: black;
+}
+
+.calender-input{
+  width: 100%;
+}
+
 .signup-input {
+  color: rgba(0, 0, 0, 0.25);
   border-radius: 0.5em;
 }
 
+.signup-button-container{
+  display: grid;
+}
+
 .signup-form-button {
-  width: 100%;
   border-radius: 10em;
-  margin-bottom: 3%;
+  margin-left: 13%;
+  margin-right: 13%;
+}
+
+.anchor{
+  text-align: center;
+  margin-bottom: 5%;
 }
 
 nz-row {
   padding-top: 5%;
 }
+
