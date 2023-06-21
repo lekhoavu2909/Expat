@@ -9,7 +9,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
-  private readonly TOKEN_NAME = 'profanis_auth';
+  private readonly TOKEN_NAME = 'token';
   isLoggedIn$ = this._isLoggedIn$.asObservable();
 
   get token(): any {
@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem(this.TOKEN_NAME);
     return !this.jwtHelper.isTokenExpired(token);
   }
 
