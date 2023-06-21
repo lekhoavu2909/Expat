@@ -1,17 +1,78 @@
+.signup-background {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  padding-top: 0%;
+  padding-left: 15%;
+  padding-right: 15%;
+  min-height: 100vh;
+  background-image: url(../../../../img/lycs-architecture-U2BI3GMnSSE-unsplash.jpg);
+}
 
-      [nz-form] {
-        padding-top: 12.5%;
-        padding-bottom: 12.5%;
-        max-width:75%;
-        padding-left: 25%;
-      }
+.signup-conatiner {
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  background-color: #ffffff;
+  margin-left: 20%;
+  margin-right: 20%;
+  border-radius: 6%;
+  opacity: 0.95;
+}
 
-      .signup-form-button {
-        width: 100%;
-      }
+.signup_col {
+  margin: 5%;
+}
 
-      nz-row{
-        padding-top: 5%;
-      }
-    
-    
+.signup-header {
+  padding-top: 8%;
+  text-align: center;
+  font-size: 2em;
+  margin: 0;
+}
+
+[nz-form] {
+
+}
+
+.form-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 5%;
+  max-width: 75%;
+  margin-left: 13%;
+  text-align: center;
+}
+
+.ng-star-inserted{
+  color: black;
+}
+
+.calender-input{
+  width: 100%;
+}
+
+.signup-input {
+  color: rgba(0, 0, 0, 0.25);
+  border-radius: 0.5em;
+}
+
+.signup-button-container{
+  display: grid;
+}
+
+.signup-form-button {
+  border-radius: 10em;
+  margin-left: 13%;
+  margin-right: 13%;
+}
+
+.anchor{
+  text-align: center;
+  margin-bottom: 5%;
+}
+
+nz-row {
+  padding-top: 5%;
+}
+

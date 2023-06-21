@@ -1,52 +1,141 @@
-<nz-row  nzJustify="space-evenly" nzAlign="middle">
-  <div nz-col nzSpan="12">
+<nz-row class="signup-background" nzJustify="space-evenly" nzAlign="middle">
+  <div class="signup-conatiner" nz-col nzSpan="12">
+    <h3 class="signup-header" nz-typography>Sign Up</h3>
     <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-      <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your username!">
-          <nz-input-group nzPrefixIcon="user">
-            <input nz-input id="nickname" formControlName="nickname" placeholder="Username"/>
-          </nz-input-group>
-        </nz-form-control>
+      <div class="form-container">
+        <div class="signup_col">
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your username!">
+              <nz-input-group class="signup-input" nzPrefixIcon="user">
+                <input
+                  nz-input
+                  id="username"
+                  formControlName="username"
+                  placeholder="Username"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control nzErrorTip="The input is not valid E-mail!">
+              <nz-input-group class="signup-input" nzPrefixIcon="mail">
+                <input
+                  nz-input
+                  formControlName="email"
+                  id="email"
+                  placeholder="E-mail"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control
+              nzErrorTip="Please use at least 8 characters one uppercase letter one lowercase letter and one number in your password"
+            >
+              <nz-input-group class="signup-input" nzPrefixIcon="lock">
+                <input
+                  nz-input
+                  type="password"
+                  formControlName="password"
+                  id="password"
+                  placeholder="Password"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control
+              nzErrorTip="Two passwords that you enter is inconsistent!"
+            >
+              <nz-input-group class="signup-input" nzPrefixIcon="check">
+                <input
+                  nz-input
+                  type="password"
+                  formControlName="checkPassword"
+                  id="checkPassword"
+                  placeholder="Confirm password"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your Nickname!">
+              <nz-input-group class="signup-input" nzPrefixIcon="user">
+                <input
+                  nz-input
+                  formControlName="knownAs"
+                  id="knownAs"
+                  placeholder="Nickname"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div class="signup_col">
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your Date Of Birth!">
+              <nz-date-picker
+                class="signup-input calender-input"
+                nz-input
+                type="text"
+                formControlName="dateOfBirth"
+                id="dateOfBirth"
+              />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your Gender!">
+              <nz-input-group class="signup-input" nzPrefixIcon="man">
+                <input
+                  nz-input
+                  formControlName="gender"
+                  id="gender"
+                  placeholder="Gender"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your City!">
+              <nz-input-group class="signup-input" nzPrefixIcon="aim">
+                <input
+                  nz-input
+                  formControlName="city"
+                  id="city"
+                  placeholder="City"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your Country">
+              <nz-input-group class="signup-input" nzPrefixIcon="flag">
+                <input
+                  nz-input
+                  formControlName="country"
+                  id="country"
+                  placeholder="Country"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
+      <nz-form-item class="signup-button-container">
+        <button
+          nzType="primary"
+          nz-button
+          class="signup-form-button login-form-margin"
+        >
+          Register
+        </button>
       </nz-form-item>
-      <nz-form-item>
-        <nz-form-control nzErrorTip="The input is not valid E-mail!">
-          <nz-input-group nzPrefixIcon="mail">
-            <input nz-input formControlName="email" id="email" placeholder="E-mail" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your password!">
-          <nz-input-group nzPrefixIcon="lock">
-            <input nz-input type="password" formControlName="checkPassword" id="checkPassword" placeholder="Password"/>
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control [nzErrorTip]="errorTpl">
-          <nz-input-group nzPrefixIcon="check">
-            <input nz-input type="password" formControlName="checkPassword" id="checkPassword" placeholder="Confirm password"/>
-          </nz-input-group>
-          <ng-template #errorTpl let-control>
-            <ng-container *ngIf="control.hasError['required']">Please confirm your password!</ng-container>
-            <ng-container *ngIf="control.hasError['confirm']">
-              Two passwords that you enter is inconsistent!
-            </ng-container>
-          </ng-template>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <button nz-button class="signup-form-button login-form-margin">Register</button>
-      </nz-form-item>
-      <a routerLink="/login">Already had an account?</a>
     </form>
-  </div>
-  <div nz-col nzSpan="12">
-    <img
-        nz-image
-        width="100%"
-        nzSrc="https://static.theceomagazine.net/wp-content/uploads/2023/01/05110108/expat.jpg"
-        alt="img"
-      />
+    <div class="anchor">
+      <a routerLink="/login">Already had an account?</a>
+    </div>
   </div>
 </nz-row>

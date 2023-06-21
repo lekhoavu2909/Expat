@@ -8,10 +8,16 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { CommonModule } from '@angular/common';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 @NgModule({
   imports: 
   [
+    NzDatePickerModule,
+    NzButtonModule,
+    CommonModule,
     SignupRoutingModule, 
     ReactiveFormsModule, 
     FormsModule, 

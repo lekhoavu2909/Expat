@@ -1,35 +1,51 @@
-<nz-row>
-  <div nz-col nzSpan="12">
-    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
-      <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your username!">
-          <nz-input-group nzPrefixIcon="user">
-            <input type="text" nz-input formControlName="userName" placeholder="Username" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your Password!">
-         <nz-input-group nzPrefixIcon="lock">
-            <input type="password" nz-input formControlName="password" placeholder="Password" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <a >
-        <button nz-button class="login-form-button" >Log in</button> <!-- [nzType]="'primary'"-->
-      </a>
-      Or
-      <a routerLink="/signup">register now!</a>
-      <br />
-      <a routerLink="/forgot">Forgot password</a>
-    </form>
+<div class="login-background">
+  <div nz-col [nzXs]="{ span: 20, offset: 1 }" [nzLg]="{ span: 20, offset: 2 }">
+    <nz-card class="login-container">
+      <nz-row nzJustify="center">
+        <div nz-col nzSpan="12">
+          <h3 class="login-header" nz-typography>Expat Management Tool</h3>
+          <form
+            nz-form
+            [formGroup]="validateForm"
+            class="login-form"
+            (ngSubmit)="submitForm()"
+          >
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please input your username!">
+                <nz-input-group class="login-input" nzPrefixIcon="user">
+                  <input
+                    type="text"
+                    nz-input
+                    formControlName="username"
+                    placeholder="Username"
+                  />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please input your Password!">
+                <nz-input-group class="login-input" nzPrefixIcon="lock">
+                  <input
+                    type="password"
+                    nz-input
+                    formControlName="password"
+                    placeholder="Password"
+                  />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <a>
+              <button nz-button nzType="primary" class="login-form-button">
+                Log in
+              </button>
+            </a>
+            Or
+            <a routerLink="/signup">register now!</a>
+          </form>
+        </div>
+      </nz-row>
+    </nz-card>
   </div>
-  <div nz-col nzSpan="12">
-    <img
-        nz-image
-        width="100%"
-        nzSrc="https://static.theceomagazine.net/wp-content/uploads/2023/01/05110108/expat.jpg"
-        alt="img"
-      />
-  </div>
-</nz-row>
+</div>
+
+
