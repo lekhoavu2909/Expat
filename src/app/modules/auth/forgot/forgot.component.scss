@@ -1,0 +1,49 @@
+.forgot-background{
+    position: relative;
+    background-image: url(../../../../img/myhq-workspaces-NEFgreoVtig-unsplash.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    padding: 10%;
+    min-height: 100vh;
+}
+
+.forgot-container{
+    margin-left: 20%;
+    margin-right: 20%;
+    border-radius: 6%;
+}
+
+nz-card{
+    opacity: 0.95;
+}
+
+.forgot-header{
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+}
+
+.forgot-form {
+    display: inline-block;
+    text-align: center;
+    padding-top: 10%;
+    margin-bottom: 10%;
+    width: 100%;
+}
+
+.forgot-input{
+    border-radius: 0.5em;
+    margin-bottom: 5%;
+}
+
+.forgot-form-button {
+    width: 100%;
+    border-radius: 0.5em;
+    margin-bottom: 3%;
+}
+
+nz-row {
+    padding-top: 5%;
+}
