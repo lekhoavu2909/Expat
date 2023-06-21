@@ -16,6 +16,8 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { SpinnerModule } from './spinner/spinner.module';
 import { LoadingInterceptor } from './loading.interceptor';
+import { JWT_OPTIONS, JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { AuthGuard } from './auth-guard.service';
 
 
 registerLocaleData(en);
@@ -34,13 +36,16 @@ registerLocaleData(en);
     NzLayoutModule,
     NzMenuModule, 
     NzImageModule,
-    SpinnerModule    
+    SpinnerModule,
+    JwtModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
     {
       provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
-    }
+    },
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+        JwtHelperService, AuthGuard 
   ],
   bootstrap: [AppComponent]
 })

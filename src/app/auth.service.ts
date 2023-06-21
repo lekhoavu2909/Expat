@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ApiService, Post } from './api.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +16,13 @@ export class AuthService {
     return localStorage.getItem(this.TOKEN_NAME);
   }
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, public jwtHelper: JwtHelperService) {
     this._isLoggedIn$.next(!!this.token);
+  }
+
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
+    return !this.jwtHelper.isTokenExpired(token);
   }
 
   forgotPassword(data: Post) {

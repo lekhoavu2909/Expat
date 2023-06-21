@@ -1,19 +1,18 @@
 .forgot-background{
+    position: relative;
     background-image: url(../../../../img/myhq-workspaces-NEFgreoVtig-unsplash.jpg);
     background-repeat: no-repeat;
-    max-height: 100%;
-    max-width: 100%;
-    background-color: white;
+    background-position: center;
+    background-attachment: fixed;
     background-size: cover;
-    padding-top: 15%;
-    padding-bottom: 15%;
-
+    padding: 10%;
+    min-height: 100vh;
 }
 
 .forgot-container{
     margin-left: 20%;
     margin-right: 20%;
-    max-height: 100%;
+    border-radius: 6%;
 }
 
 nz-card{
@@ -21,13 +20,12 @@ nz-card{
 }
 
 .forgot-header{
-    text-align: center;
     width: 100%;
-    opacity: 100%;
+    text-align: center;
+    font-size: 2em;
 }
 
 .forgot-form {
-    opacity: 100%;
     display: inline-block;
     text-align: center;
     padding-top: 10%;
