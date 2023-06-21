@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -18,6 +18,8 @@ import { SpinnerModule } from './spinner/spinner.module';
 import { LoadingInterceptor } from './loading.interceptor';
 import { JWT_OPTIONS, JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { AuthGuard } from './auth-guard.service';
+import { ToastrModule } from 'ngx-toastr';
+import { ErrorInterceptor } from './error.interceptor';
 
 
 registerLocaleData(en);
@@ -37,7 +39,12 @@ registerLocaleData(en);
     NzMenuModule, 
     NzImageModule,
     SpinnerModule,
-    JwtModule
+    JwtModule,
+    CommonModule,
+    ToastrModule.forRoot({
+      timeOut : 2000,
+      positionClass :'toast-top-right'
+    })
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
@@ -45,7 +52,12 @@ registerLocaleData(en);
       provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
     },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-        JwtHelperService, AuthGuard 
+        JwtHelperService, AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

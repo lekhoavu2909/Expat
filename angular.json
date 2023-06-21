@@ -37,7 +37,8 @@
             "styles": [
               "node_modules/ng-zorro-antd/ng-zorro-antd.css",
               "src/theme.less",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css" 
             ],
             "scripts": []
           },

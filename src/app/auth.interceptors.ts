@@ -7,6 +7,7 @@ import {
   } from '@angular/common/http';
   import { Injectable } from '@angular/core';
   import { Observable } from 'rxjs';
+  import { tap } from "rxjs/operators";
   import { AuthService } from './auth.service';
   
   @Injectable()
@@ -14,14 +15,15 @@ import {
     constructor(private authService: AuthService) {}
   
     intercept(
-      request: HttpRequest<unknown>,
+      request: HttpRequest<any>,
       next: HttpHandler
-    ): Observable<HttpEvent<unknown>> {
+    ): Observable<HttpEvent<any>> {
       request = request.clone({
         headers: request.headers.set('authorization', this.authService.token),
       });
   
-      return next.handle(request);
+      return next
+      .handle(request)
     }
   }
   

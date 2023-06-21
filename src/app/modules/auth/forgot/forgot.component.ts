@@ -39,7 +39,6 @@ export class ForgotComponent extends UnsubscriptionComponent implements OnInit{
     this.authService
       .forgotPassword(data)
       .subscribe((response) => {
-        console.log(response.token)
         this.router.navigate(['/welcome']);
       });
   }

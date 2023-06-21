@@ -6,8 +6,9 @@ import {
   Validators,
 } from '@angular/forms';
 
+
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../../auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -29,7 +30,6 @@ export class SignupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.validateForm);
     this.validateForm = this.fb.group({
       username: [null, [Validators.required]],
       knownAs: [null, [Validators.required]],
@@ -53,9 +53,9 @@ export class SignupComponent implements OnInit {
   submitForm() {
     if (this.validateForm.valid) {
       const signupData = this.validateForm.value;
-      this.accService.signUpForm(signupData);
-      console.log('submit', signupData);
-      this.route.navigate(['./login']);
+      this.accService.signup(signupData).subscribe((response) => {
+        this.route.navigate(['/welcome']);
+      });
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {

@@ -3,6 +3,8 @@ import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ApiService, Post } from './api.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Login, Signup } from "../app/modules/auth/login/post.model";
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +18,7 @@ export class AuthService {
     return localStorage.getItem(this.TOKEN_NAME);
   }
 
-  constructor(private apiService: ApiService, public jwtHelper: JwtHelperService) {
+  constructor(private apiService: ApiService, public jwtHelper: JwtHelperService, private toastr: ToastrService) {
     this._isLoggedIn$.next(!!this.token);
   }
 
@@ -27,6 +29,25 @@ export class AuthService {
 
   forgotPassword(data: Post) {
     return this.apiService.forgotPassword(data).pipe(
+      tap((response: any) => {
+        this._isLoggedIn$.next(true);
+        localStorage.setItem(this.TOKEN_NAME, response.token);
+      })
+    );
+  }
+
+  login(data: Login){
+    return this.apiService.loginForm(data)
+    .pipe(
+      tap((response: any) => {
+        this._isLoggedIn$.next(true);
+        localStorage.setItem(this.TOKEN_NAME, response.token);
+      })
+    );
+  }
+
+  signup(data: Signup){
+    return this.apiService.signUpForm(data).pipe(
       tap((response: any) => {
         this._isLoggedIn$.next(true);
         localStorage.setItem(this.TOKEN_NAME, response.token);
