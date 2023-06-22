@@ -144,8 +144,6 @@ export class CandidateListComponent implements OnInit {
   }
 
   submitForm(): void {
-    console.log('submit', this.inputGroup.value);
-    console.log('submit', this.inputGroup.value);
     this.listOfData = [
       ...this.listOfData,
       {
@@ -173,8 +171,7 @@ export class CandidateListComponent implements OnInit {
       Skills: [null],
       Note: [null]
     });
-    this.isVisible = false;
-
+    this.handleCancel()
   }
 
   deleteRow(id: string): void {
@@ -182,11 +179,21 @@ export class CandidateListComponent implements OnInit {
   }
 
   showModal(): void {
+    this.handleCancel()
+    this.updateEditCache();
     this.isVisible = true;
+    this.inputGroup = this.fb.group({
+      Name: [null],
+      Gender: [null],
+      InterviewDate: [null],
+      Stack: [null],
+      Experience: [null],
+      Skills: [null],
+      Note: [null]
+    });
   }
 
   handleCancel(): void {
-    console.log('Button cancel clicked!');
     this.isVisible = false;
     this.editVisible = false;
   }

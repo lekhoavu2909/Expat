@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Login, Signup } from "../app/modules/auth/login/post.model";
+import { Login, Signup, changePassword } from "../app/modules/auth/login/post.model";
 
 export interface Post {
     "email": string,
@@ -26,6 +26,10 @@ export class ApiService {
 
   signUpForm(data: Signup) {
     return this.http.post(this.ROOT_URL + '/api/Account/register', data);
+  }
+
+  changePasswordForm(data: changePassword) {
+    return this.http.post(this.ROOT_URL + '/api/Account/ChangePassword', data);
   }
 
   getProducts(): Observable<Post[]> {

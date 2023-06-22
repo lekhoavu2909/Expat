@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { WelcomeComponent } from './welcome.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
@@ -14,6 +14,9 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzListModule } from 'ng-zorro-antd/list';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: 
@@ -32,7 +35,11 @@ import { NzListModule } from 'ng-zorro-antd/list';
     NzPaginationModule,
     NzButtonModule,
     NzPopoverModule,
-    NzListModule
+    NzListModule,
+    NzDrawerModule,
+    ReactiveFormsModule,
+    NzResultModule,
+    CommonModule
   ],
   declarations: [WelcomeComponent],
   exports: [WelcomeComponent]

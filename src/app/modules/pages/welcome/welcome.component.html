@@ -6,7 +6,7 @@
             [(nzCollapsed)]="isCollapsed"
             [nzTrigger]="null">
     <div class="sidebar-logo">
-      <a routerLink="/welcome" target="_blank">
+      <a routerLink="/welcome" >
         <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
         <h1>Expat Interview</h1>
       </a>
@@ -52,12 +52,78 @@
           <nz-col><h1 class="navbar-title">Expat</h1></nz-col>
           <nz-col nzOffset="20">
             <ng-template #contentTemplate>
-              <nz-list nzBordered>
+              <nz-list >
                 <nz-list-item>
                   <a>User info</a>
                 </nz-list-item>
                 <nz-list-item>
-                  <a>Change Password</a>
+                  <a (click)="openDrawer()">Change Password</a>
+                  <nz-drawer
+                    [nzBodyStyle]="{ overflow: 'auto' }"
+                    [nzMaskClosable]="false"
+                    [nzWidth]="400"
+                    [nzVisible]="drawerVisible"
+                    nzTitle="Change Password"
+                    (nzOnClose)="closeDrawer()"
+                  >
+                  <ng-container *nzDrawerContent>
+                    <ng-container *ngIf="!this.changed; else changedTemplate">
+                      <form nz-form [formGroup]="changePasswordForm">
+                        <nz-form-item>
+                          <nz-form-control nzErrorTip="Please input your Password!">
+                            <nz-input-group class="login-input" nzPrefixIcon="lock">
+                              <input
+                                type="password"
+                                nz-input
+                                formControlName="currentPassword"
+                                placeholder="Current password"
+                              />
+                            </nz-input-group>
+                          </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                          <nz-form-control nzErrorTip="Please input your new password!">
+                            <nz-input-group class="login-input" nzPrefixIcon="lock">
+                              <input
+                                type="password"
+                                nz-input
+                                formControlName="newPassword"
+                                placeholder="New password"
+                              />
+                            </nz-input-group>
+                          </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                          <nz-form-control nzErrorTip="Please confirm your new password!">
+                            <nz-input-group class="login-input" nzPrefixIcon="lock">
+                              <input
+                                type="password"
+                                nz-input
+                                formControlName="confirmNewPassword"
+                                placeholder="Confirm Password"
+                              />
+                            </nz-input-group>
+                          </nz-form-control>
+                        </nz-form-item>
+                        <a>
+                          <button nz-button nzType="primary" (click)="submitForm()">
+                            Confirm
+                          </button>
+                        </a>
+                      </form>
+                    </ng-container>
+                    <ng-template #changedTemplate>
+                      <nz-result
+                        nzStatus="success"
+                        nzTitle="Successfully changed password!"
+                      >
+                        <div nz-result-extra>
+                          <button nz-button nzType="primary" (click)="closeDrawer()">Close</button>
+                        </div>
+                      </nz-result>
+                    </ng-template>
+                  </ng-container>
+                  </nz-drawer>
                 </nz-list-item>
                 <nz-list-item>
                   <a (click)="logout()">Logout</a>
@@ -69,8 +135,8 @@
               nzType="default"
               nzShape="circle"
               nz-popover
-              nzPopoverTitle="User"
-              [(nzPopoverVisible)]="drawerVisible"
+              [nzPopoverTitle]="this.menuTitle"
+              [(nzPopoverVisible)]="popoverVisible"
               nzPopoverTrigger="click"
               [nzPopoverContent]="contentTemplate"
               nzPopoverPlacement="bottomRight"

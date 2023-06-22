@@ -25,7 +25,7 @@ export class ForgotComponent extends UnsubscriptionComponent implements OnInit{
   forgotForm !: UntypedFormGroup
   ROOT_URL = 'https://expat-api.azurewebsites.net';
   
-  constructor(private authService: AuthService, private router: Router, private fb: UntypedFormBuilder, private http: HttpClient) {
+  constructor(private authService: AuthService, private route: Router, private fb: UntypedFormBuilder, private http: HttpClient) {
     super();
   }
 
@@ -39,11 +39,15 @@ export class ForgotComponent extends UnsubscriptionComponent implements OnInit{
     this.authService
       .forgotPassword(data)
       .subscribe((response) => {
-        this.router.navigate(['/welcome']);
+        this.route.navigate(['/welcome']);
       });
   }
   
   ngOnInit(): void {
+    if(this.authService.isAuthenticated()){
+      this.route.navigate(['welcome']);
+    }
+
     this.forgotForm = this.fb.group({
       email: [null, [Validators.email, Validators.required]],
       newPassword:[null, [Validators.required]]

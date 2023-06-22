@@ -8,15 +8,15 @@
   class="data-table"
 >
   <thead>
-      <button nz-button (click)="showModal()">Add</button>
-        <nz-drawer
-          [nzBodyStyle]="{ overflow: 'auto' }"
-          [nzMaskClosable]="false"
-          [nzWidth]="720"
-          [nzVisible]="isVisible"
-          nzTitle="Create"
-          (nzOnClose)="handleCancel()"
-        >
+    <button nz-button (click)="showModal()">Add</button>
+      <nz-drawer
+        [nzBodyStyle]="{ overflow: 'auto' }"
+        [nzMaskClosable]="false"
+        [nzWidth]="720"
+        [nzVisible]="isVisible"
+        nzTitle="Create"
+        (nzOnClose)="handleCancel()"
+      >
         <ng-container *nzDrawerContent>
           <form nz-form [formGroup]="inputGroup">
             <nz-form-item>
@@ -99,8 +99,8 @@
             </nz-form-item>
             <button nz-button nzType="primary" (click)="submitForm()">Submit</button>
         </form>
-        </ng-container>
-        </nz-drawer>
+      </ng-container>
+    </nz-drawer>
     <tr>
       <th nzWidth="30%">Candidate</th>
       <th nzWidth="5%">Gender</th>
