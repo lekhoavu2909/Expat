@@ -50,6 +50,34 @@
             </span>
           </div>
           <nz-col><h1 class="navbar-title">Expat</h1></nz-col>
+          <nz-col nzOffset="20">
+            <ng-template #contentTemplate>
+              <nz-list nzBordered>
+                <nz-list-item>
+                  <a>User info</a>
+                </nz-list-item>
+                <nz-list-item>
+                  <a>Change Password</a>
+                </nz-list-item>
+                <nz-list-item>
+                  <a (click)="logout()">Logout</a>
+                </nz-list-item>
+              </nz-list>
+            </ng-template>
+            <button 
+              nz-button
+              nzType="default"
+              nzShape="circle"
+              nz-popover
+              nzPopoverTitle="User"
+              [(nzPopoverVisible)]="drawerVisible"
+              nzPopoverTrigger="click"
+              [nzPopoverContent]="contentTemplate"
+              nzPopoverPlacement="bottomRight"
+            >
+              <span nz-icon nzType="user" nzTheme="outline"></span>
+            </button>
+          </nz-col>
         </nz-row>
       </div>
     </nz-header>

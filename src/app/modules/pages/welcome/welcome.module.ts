@@ -11,6 +11,9 @@ import { NzImageModule } from 'ng-zorro-antd/image';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzListModule } from 'ng-zorro-antd/list';
 
 @NgModule({
   imports: 
@@ -26,7 +29,10 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     NzImageModule,
     NzInputModule,
     NzFormModule,
-    NzPaginationModule
+    NzPaginationModule,
+    NzButtonModule,
+    NzPopoverModule,
+    NzListModule
   ],
   declarations: [WelcomeComponent],
   exports: [WelcomeComponent]

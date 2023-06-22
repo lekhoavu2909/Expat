@@ -32,6 +32,11 @@ export class AuthService {
       tap((response: any) => {
         this._isLoggedIn$.next(true);
         localStorage.setItem(this.TOKEN_NAME, response.token);
+        localStorage.setItem('username', response.username);
+        localStorage.setItem('email', response.email);
+        localStorage.setItem('photoUrl', response.photoUrl);
+        localStorage.setItem('knownAs', response.knownAs);
+        localStorage.setItem('gender', response.gender);
       })
     );
   }
@@ -42,6 +47,11 @@ export class AuthService {
       tap((response: any) => {
         this._isLoggedIn$.next(true);
         localStorage.setItem(this.TOKEN_NAME, response.token);
+        localStorage.setItem('username', response.username);
+        localStorage.setItem('email', response.email);
+        localStorage.setItem('photoUrl', response.photoUrl);
+        localStorage.setItem('knownAs', response.knownAs);
+        localStorage.setItem('gender', response.gender);
       })
     );
   }
@@ -51,6 +61,11 @@ export class AuthService {
       tap((response: any) => {
         this._isLoggedIn$.next(true);
         localStorage.setItem(this.TOKEN_NAME, response.token);
+        localStorage.setItem('username', response.username);
+        localStorage.setItem('email', response.email);
+        localStorage.setItem('photoUrl', response.photoUrl);
+        localStorage.setItem('knownAs', response.knownAs);
+        localStorage.setItem('gender', response.gender);
       })
     );
   }
