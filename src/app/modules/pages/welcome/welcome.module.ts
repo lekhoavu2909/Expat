@@ -17,6 +17,7 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { CommonModule } from '@angular/common';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 
 @NgModule({
   imports: 
@@ -39,7 +40,8 @@ import { CommonModule } from '@angular/common';
     NzDrawerModule,
     ReactiveFormsModule,
     NzResultModule,
-    CommonModule
+    CommonModule,
+    NzDescriptionsModule
   ],
   declarations: [WelcomeComponent],
   exports: [WelcomeComponent]

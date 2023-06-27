@@ -29,9 +29,7 @@ export class LoginComponent implements OnInit {
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
       const loginData = this.validateForm.value;
-      this.accService.login(loginData).subscribe((response) => {
-        this.route.navigate(['/welcome']);
-      });
+      this.accService.login(loginData)
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {

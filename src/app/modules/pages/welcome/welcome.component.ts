@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
+import { User } from '../../auth/login/post.model';
 
 
 @Component({
@@ -13,15 +14,12 @@ export class WelcomeComponent implements OnInit {
   isCollapsed = false;
   changePasswordForm!: UntypedFormGroup;
   constructor(private route : Router, private fb: UntypedFormBuilder, private accService: AuthService) { }
-  username = localStorage.getItem('username')
-  email = localStorage.getItem('email')
-  photoUrl = localStorage.getItem('photoUrl')
-  knownAs = localStorage.getItem('knownAs')
-  gender = localStorage.getItem('gender')
   drawerVisible = false
+  infoVisible = false
   popoverVisible = false
   changed = false
-  menuTitle = "Hi, " + this.knownAs
+  menuTitle = "Hi, "
+  user: any
 
   logout(){
     localStorage.clear();
@@ -35,6 +33,14 @@ export class WelcomeComponent implements OnInit {
   closeDrawer(): void {
     this.drawerVisible = false;
     this.changed = false
+  }
+
+  openInfo(): void {
+    this.infoVisible = true
+  }
+
+  closeInfo(): void {
+    this.infoVisible = false;
   }
 
   submitForm(): void {
@@ -61,18 +67,15 @@ export class WelcomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.username = localStorage.getItem('username')
-    this.email = localStorage.getItem('email')
-    this.photoUrl = localStorage.getItem('photoUrl')
-    this.knownAs = localStorage.getItem('knownAs')
-    this.gender = localStorage.getItem('gender')
     this.changePasswordForm = this.fb.group({
       username: localStorage.getItem('username'),
       currentPassword: [null, [Validators.required]],
       newPassword: [null, [Validators.required]],
       confirmNewPassword: [null, [Validators.required]]
     })
-    this.menuTitle = "Hi, " + this.knownAs
+    const userJString = localStorage.getItem('user')
+    console.log(userJString)
+    this.user = userJString ? JSON.parse(userJString) : {}
+    this.menuTitle = "Hi, " + this.user.knownAs
   }
-
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Login, Signup, changePassword } from "../app/modules/auth/login/post.model";
+import { Login, Signup, User, changePassword } from "../app/modules/auth/login/post.model";
 
 export interface Post {
     "email": string,
@@ -12,7 +12,7 @@ export interface Post {
   providedIn: 'root',
 })
 export class ApiService {
-    ROOT_URL = 'https://expat-api.azurewebsites.net';
+  ROOT_URL = 'https://expat-api.azurewebsites.net';
 
   constructor(private http: HttpClient) {}
 
@@ -32,9 +32,7 @@ export class ApiService {
     return this.http.post(this.ROOT_URL + '/api/Account/ChangePassword', data);
   }
 
-  getProducts(): Observable<Post[]> {
-    return this.http.get<Post[]>('products', {
-      headers: {},
-    });
+  getUser(username: string | null){
+    return this.http.get(this.ROOT_URL + '/api/Users/'+ username);
   }
 }

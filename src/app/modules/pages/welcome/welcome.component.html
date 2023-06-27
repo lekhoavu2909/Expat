@@ -54,7 +54,29 @@
             <ng-template #contentTemplate>
               <nz-list >
                 <nz-list-item>
-                  <a>User info</a>
+                  <a (click)="openInfo()">User info</a>
+                  <nz-drawer
+                    [nzBodyStyle]="{ overflow: 'auto' }"
+                    [nzMaskClosable]="false"
+                    [nzWidth]="400"
+                    [nzVisible]="infoVisible"
+                    nzTitle="User"
+                    (nzOnClose)="closeInfo()"
+                  >
+                  <ng-container *nzDrawerContent>
+                    <nz-descriptions nzTitle="User Info">
+                      <nz-descriptions-item nzTitle="Username">data.username</nz-descriptions-item>
+                      <br />
+                      <nz-descriptions-item nzTitle="Age"></nz-descriptions-item>
+                      <nz-descriptions-item nzTitle="Nickname">Hangzhou, Zhejiang</nz-descriptions-item>
+                      <nz-descriptions-item nzTitle="Gender">Empty</nz-descriptions-item>
+                      <nz-descriptions-item nzTitle="Country">
+                      </nz-descriptions-item>
+                      <nz-descriptions-item nzTitle="City">
+                      </nz-descriptions-item>
+                    </nz-descriptions>
+                  </ng-container>
+                  </nz-drawer>
                 </nz-list-item>
                 <nz-list-item>
                   <a (click)="openDrawer()">Change Password</a>
