@@ -32,6 +32,11 @@ export class ApiService {
     return this.http.post(this.ROOT_URL + '/api/Account/ChangePassword', data);
   }
 
+  savePhotoUrl(id: any){
+    console.log(this.ROOT_URL + '/api/Users/set-main-photo/' + id)
+    return this.http.put(this.ROOT_URL + '/api/Users/set-main-photo/' + id, null)
+  }
+
   getUser(username: string | null){
     return this.http.get(this.ROOT_URL + '/api/Users/'+ username);
   }

@@ -65,20 +65,27 @@ export class AuthService {
   changePassword(data: changePassword){
     return this.apiService.changePasswordForm(data).pipe(
       tap((response: any) => {
-        this._isLoggedIn$.next(true);
-        localStorage.setItem(this.TOKEN_NAME, response.token);
-        localStorage.setItem('username', response.username);
-        this.getUser()
+        this.route.navigate(['/login']);
       })
     );
   }
 
+  savePhoto(id: any){
+    return this.apiService.savePhotoUrl(id).pipe(
+      concatMap(() => {
+        return this.getUser()
+      }),
+      tap((res) => {
+        this.route.navigate(['/welcome']);
+      })
+    ).subscribe();
+  }
+
   getUser(){
-    console.log(localStorage.getItem('username'))
     return this.apiService.getUser(localStorage.getItem('username')).pipe(
       tap((response: any) => {
-        console.log(response)
         localStorage.setItem('user', JSON.stringify(response))
+        console.log(localStorage.getItem('username'))
     }))
   }
 }

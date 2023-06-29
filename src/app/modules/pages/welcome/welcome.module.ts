@@ -18,6 +18,12 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { CommonModule } from '@angular/common';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+
 
 @NgModule({
   imports: 
@@ -30,7 +36,6 @@ import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
     NzIconModule,
     NzLayoutModule,
     NzMenuModule,
-    NzImageModule,
     NzInputModule,
     NzFormModule,
     NzPaginationModule,
@@ -41,7 +46,13 @@ import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
     ReactiveFormsModule,
     NzResultModule,
     CommonModule,
-    NzDescriptionsModule
+    NzDescriptionsModule,
+    NzAvatarModule,
+    NzUploadModule,
+    NzModalModule,
+    NzCardModule,
+    NzImageModule,
+    NzSpaceModule
   ],
   declarations: [WelcomeComponent],
   exports: [WelcomeComponent]
