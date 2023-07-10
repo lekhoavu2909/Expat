@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-
-interface ItemData {
-  id: string;
-  name: string;
-}
+import { tap } from 'rxjs';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'nz-demo-table-edit-row',
@@ -13,8 +10,8 @@ interface ItemData {
 })
 export class ExperienceComponent implements OnInit {
   i=0
-  editCache: { [key: string]: { edit: boolean; data: ItemData } } = {};
-  listOfData: ItemData[] = [];
+  editCache: { [key: string]: { edit: boolean; data: any } } = {};
+  listOfData: any 
   inputGroup!: UntypedFormGroup;
 
   startEdit(id: string): void {
@@ -23,7 +20,7 @@ export class ExperienceComponent implements OnInit {
   }
 
   cancelEdit(id: string): void {
-    const index = this.listOfData.findIndex(item => item.id === id);
+    const index = this.listOfData.findIndex((item:any) => item.id === id);
     this.editCache[id] = {
       data: { ...this.listOfData[index]},
       edit: false
@@ -31,31 +28,26 @@ export class ExperienceComponent implements OnInit {
   }
 
   saveEdit(id: string): void {
-    const index = this.listOfData.findIndex(item => item.id === id);
+    const index = this.listOfData.findIndex((item:any) => item.id === id);
     Object.assign(this.listOfData[index], this.editCache[id].data);
+    this.authService.putExp(this.editCache[id].data.id, this.editCache[id].data.level)
     this.editCache[id].edit = false;
   }
-  constructor(private fb: UntypedFormBuilder) {}
+  constructor(private fb: UntypedFormBuilder, private authService: AuthService) {}
 
 
   saveOriginal(): void {
-    console.log('submit', this.inputGroup.value);
-    this.listOfData = [
-      ...this.listOfData,
-      {
-        id: `${this.i}`,
-        name: this.inputGroup.value['name']
-      }
-    ];
+    const newLevel = this.inputGroup.value['level'];
     this.i++;
+    this.authService.addExp(newLevel);
     this.updateEditCache();
     this.inputGroup = this.fb.group({
-      name: [null]
+      level: [null]
     });
   }
 
   updateEditCache(): void {
-    this.listOfData.forEach(item => {
+    this.listOfData.forEach((item:any) => {
       this.editCache[item.id] = {
         edit: false,
         data: { ...item }
@@ -63,22 +55,35 @@ export class ExperienceComponent implements OnInit {
     });
   }
 
-  deleteRow(id: string): void {
-    this.listOfData = this.listOfData.filter(d => d.id !== id);
+  getExp(){
+    return this.authService.getSettings('Experience').pipe(
+      tap((res)  => {
+        localStorage.setItem('Experience', JSON.stringify(res));
+        const JString = localStorage.getItem('Experience')
+        this.listOfData = JString ? JSON.parse(JString) : {}
+      })
+    ).subscribe();
+  }
+
+  deleteRow(id: number): void {
+    this.authService.deleteExp(id);
+    this.listOfData = this.listOfData.filter((d:any) => d.id !== id);
+    console.log(id);
+    this.updateEditCache();
   }
 
   ngOnInit(): void {
-    const data = [];
-    for (let i = 0; i < 0; i++) {
-      data.push({
-        id: `${this.i}`,
-        name: ``
-      });
-    }
-    this.listOfData = data;
-    this.updateEditCache();
+    this.authService.getSettings('Experience').pipe(
+      tap((res)  => {
+        localStorage.setItem('Experience', JSON.stringify(res));
+        const JString = localStorage.getItem('Experience')
+        console.log(JString)
+        this.listOfData = JString ? JSON.parse(JString) : {}
+        this.updateEditCache();
+      })
+    ).subscribe();
     this.inputGroup = this.fb.group({
-      name: [null]
+      level: [null]
     });
   }
 }

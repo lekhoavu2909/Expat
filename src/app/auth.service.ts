@@ -88,4 +88,102 @@ export class AuthService {
         console.log(localStorage.getItem('username'))
     }))
   }
+
+  getSettings(apiName: string){
+    return this.apiService.getSettings(apiName).pipe(
+      tap((response: any) => {
+        console.log(response)
+      })
+    );
+  }
+
+  putExp(id: number, newLevel: string){
+    return this.apiService.putExperience(id, newLevel).pipe(
+      tap((res) => {
+        this.getSettings('Experience')
+        window.location.reload();
+        this.route.navigate(['/welcome/experience']);
+      })
+    ).subscribe();
+  }
+
+  addExp(newLevel: string){
+    return this.apiService.addExperience(newLevel).pipe(
+      tap((res) => {
+        this.getSettings('Experience')
+        window.location.reload();
+        this.route.navigate(['/welcome/experience']);
+      })
+    ).subscribe();
+  }
+
+  deleteExp(id: number){
+    return this.apiService.deleteExperience(id).pipe(
+      tap((res) => {
+        this.getSettings('Experience')
+        window.location.reload();
+        this.route.navigate(['/welcome/experience']);
+      })
+    ).subscribe();
+  }
+
+  putStack(id: number, newLevel: string){
+    return this.apiService.putStack(id, newLevel).pipe(
+      tap((res) => {
+        this.getSettings('Stack')
+        window.location.reload();
+        this.route.navigate(['/welcome/stack']);
+      })
+    ).subscribe();
+  }
+
+  addStack(newLevel: string){
+    return this.apiService.addStack(newLevel).pipe(
+      tap((res) => {
+        this.getSettings('Stack')
+        window.location.reload();
+        this.route.navigate(['/welcome/stack']);
+      })
+    ).subscribe();
+  }
+
+  deleteStack(id: number){
+    return this.apiService.deleteExperience(id).pipe(
+      tap((res) => {
+        this.getSettings('Stack')
+        window.location.reload();
+        this.route.navigate(['/welcome/stack']);
+      })
+    ).subscribe();
+  }
+
+  putSkill(id: number, newLevel: string){
+    return this.apiService.putSkill(id, newLevel).pipe(
+      tap((res) => {
+        this.getSettings('Skill')
+        window.location.reload();
+        this.route.navigate(['/welcome/skill']);
+      })
+    ).subscribe();
+  }
+
+  addSkill(newLevel: string){
+    return this.apiService.addSkill(newLevel).pipe(
+      tap((res) => {
+        this.getSettings('Skill')
+        window.location.reload();
+        this.route.navigate(['/welcome/skill']);
+      })
+    ).subscribe();
+  }
+
+  deleteSkill(id: number){
+    return this.apiService.deleteExperience(id).pipe(
+      tap((res) => {
+        this.getSettings('Skill')
+        window.location.reload();
+        this.route.navigate(['/welcome/skill']);
+      })
+    ).subscribe();
+  }
 }

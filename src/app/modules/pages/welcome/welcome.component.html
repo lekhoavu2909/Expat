@@ -68,8 +68,8 @@
                       <nz-list-item>
                         <nz-space [nzSize]="12">
                           <img nz-image width="100px" height="100px" nzSrc="{{this.user.photoUrl}}">
-                          <ng-container *ngIf="!this.onUpload else uploadTemplate">
-                            <button class="upload-img" nz-button (click)="handleUpload()">Upload new avatar</button>
+                          <ng-container class="upload-img" *ngIf="!this.onUpload else uploadTemplate">
+                            <button nz-button (click)="handleUpload()">Upload new avatar</button>
                           </ng-container>
                           <ng-template #uploadTemplate>
                             <input class="upload-img" type="file" (change)="onImageUpload($event)">

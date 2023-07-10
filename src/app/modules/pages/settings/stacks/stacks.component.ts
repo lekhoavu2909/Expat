@@ -60,7 +60,6 @@ export class StacksComponent implements OnInit {
         data: { ...item }
       };
     });
-    console.log(this.i)
   }
 
   deleteRow(id: string): void {
