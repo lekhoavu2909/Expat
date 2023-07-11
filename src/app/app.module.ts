@@ -20,6 +20,7 @@ import { JWT_OPTIONS, JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { AuthGuard } from './auth-guard.service';
 import { ToastrModule } from 'ngx-toastr';
 import { ErrorInterceptor } from './error.interceptor';
+import { AuthInterceptor } from './auth.interceptors';
 
 
 registerLocaleData(en);
@@ -56,6 +57,11 @@ registerLocaleData(en);
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
       multi: true
     }
   ],

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, Validators, UntypedFormGroup } from '@angular/forms';
 import { AuthService } from '../../../auth.service';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -14,9 +13,12 @@ export class LoginComponent implements OnInit {
   validateForm!: UntypedFormGroup;
 
 
-  constructor(private accService: AuthService, private fb: UntypedFormBuilder, private route: Router, private toastr: ToastrService) {}
+  constructor(private accService: AuthService, private fb: UntypedFormBuilder, private route: Router) {}
 
   ngOnInit(): void {
+    if(this.accService.isAuthenticated()){
+      this.route.navigate(['welcome']);
+    }
     this.validateForm = this.fb.group({
       username: [null, [Validators.required]],
       password: [null, [Validators.required]]
@@ -27,9 +29,7 @@ export class LoginComponent implements OnInit {
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
       const loginData = this.validateForm.value;
-      this.accService.login(loginData).subscribe((response) => {
-        this.route.navigate(['/welcome']);
-      });
+      this.accService.login(loginData)
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {

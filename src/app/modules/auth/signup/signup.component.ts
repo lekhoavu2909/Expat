@@ -30,6 +30,10 @@ export class SignupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if(this.accService.isAuthenticated()){
+      this.route.navigate(['welcome']);
+    }
+
     this.validateForm = this.fb.group({
       username: [null, [Validators.required]],
       knownAs: [null, [Validators.required]],

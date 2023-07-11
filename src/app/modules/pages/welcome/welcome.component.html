@@ -6,7 +6,7 @@
             [(nzCollapsed)]="isCollapsed"
             [nzTrigger]="null">
     <div class="sidebar-logo">
-      <a routerLink="/welcome" target="_blank">
+      <a routerLink="/welcome" >
         <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
         <h1>Expat Interview</h1>
       </a>
@@ -52,12 +52,134 @@
           <nz-col><h1 class="navbar-title">Expat</h1></nz-col>
           <nz-col nzOffset="20">
             <ng-template #contentTemplate>
-              <nz-list nzBordered>
+              <nz-list >
                 <nz-list-item>
-                  <a>User info</a>
+                  <a (click)="openInfo()">User info</a>
+                  <nz-drawer
+                    [nzBodyStyle]="{ overflow: 'auto' }"
+                    [nzMaskClosable]="false"
+                    [nzWidth]="400"
+                    [nzVisible]="infoVisible"
+                    nzTitle="User"
+                    (nzOnClose)="closeInfo()"
+                  >
+                  <ng-container *nzDrawerContent>
+                    <nz-list nzTitle="User Info">
+                      <nz-list-item>
+                        <nz-space [nzSize]="12">
+                          <img nz-image width="100px" height="100px" nzSrc="{{this.user.photoUrl}}">
+                          <ng-container class="upload-img" *ngIf="!this.onUpload else uploadTemplate">
+                            <button nz-button (click)="handleUpload()">Upload new avatar</button>
+                          </ng-container>
+                          <ng-template #uploadTemplate>
+                            <input class="upload-img" type="file" (change)="onImageUpload($event)">
+                          </ng-template>
+                        </nz-space>
+                          
+                        <nz-modal
+                          [nzVisible]="previewVisible"
+                          [nzContent]="modalContent"
+                          [nzFooter]="null"
+                          (nzOnCancel)="previewVisible = false"
+                        >
+                          <ng-template #modalContent>
+                            <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                          </ng-template>
+                        </nz-modal>
+                        <!-- <nz-row>
+                          <nz-avatar nzSize="large" nzSrc={{this.user.photoUrl}}></nz-avatar>
+                          <nz-col nzOffset="1">
+                            <form>
+                              <div class="form-group">
+                                <input type="file" (change)="onImageUpload($event)">
+                                <input type="button" (click)="imageUploadAction()" value="Upload Image" class="btn1">
+                              </div>
+                            </form>
+                          </nz-col>
+                        </nz-row> -->
+                      </nz-list-item>
+                      <nz-list-item>
+                        Username: {{this.user.username}}
+                      </nz-list-item>
+                      <nz-list-item>Age: {{this.user.age}}</nz-list-item>
+                      <nz-list-item>Nickname: {{this.user.knownAs}}</nz-list-item>
+                      <nz-list-item>Gender: {{this.user.gender}}</nz-list-item>
+                      <nz-list-item>Country: {{this.user.country}}
+                      </nz-list-item>
+                      <nz-list-item>City: {{this.user.city}}
+                      </nz-list-item>
+                    </nz-list>
+                  </ng-container>
+                  </nz-drawer>
                 </nz-list-item>
                 <nz-list-item>
-                  <a>Change Password</a>
+                  <a (click)="openDrawer()">Change Password</a>
+                  <nz-drawer
+                    [nzBodyStyle]="{ overflow: 'auto' }"
+                    [nzMaskClosable]="false"
+                    [nzWidth]="400"
+                    [nzVisible]="drawerVisible"
+                    nzTitle="Change Password"
+                    (nzOnClose)="closeDrawer()"
+                  >
+                  <ng-container *nzDrawerContent>
+                    <ng-container *ngIf="!this.changed; else changedTemplate">
+                      <form nz-form [formGroup]="changePasswordForm">
+                        <nz-form-item>
+                          <nz-form-control nzErrorTip="Please input your Password!">
+                            <nz-input-group class="login-input" nzPrefixIcon="lock">
+                              <input
+                                type="password"
+                                nz-input
+                                formControlName="currentPassword"
+                                placeholder="Current password"
+                              />
+                            </nz-input-group>
+                          </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                          <nz-form-control nzErrorTip="Please input your new password!">
+                            <nz-input-group class="login-input" nzPrefixIcon="lock">
+                              <input
+                                type="password"
+                                nz-input
+                                formControlName="newPassword"
+                                placeholder="New password"
+                              />
+                            </nz-input-group>
+                          </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                          <nz-form-control nzErrorTip="Please confirm your new password!">
+                            <nz-input-group class="login-input" nzPrefixIcon="lock">
+                              <input
+                                type="password"
+                                nz-input
+                                formControlName="confirmNewPassword"
+                                placeholder="Confirm Password"
+                              />
+                            </nz-input-group>
+                          </nz-form-control>
+                        </nz-form-item>
+                        <a>
+                          <button nz-button nzType="primary" (click)="submitForm()">
+                            Confirm
+                          </button>
+                        </a>
+                      </form>
+                    </ng-container>
+                    <ng-template #changedTemplate>
+                      <nz-result
+                        nzStatus="success"
+                        nzTitle="Successfully changed password!"
+                      >
+                        <div nz-result-extra>
+                          <button nz-button nzType="primary" (click)="closeDrawer()">Close</button>
+                        </div>
+                      </nz-result>
+                    </ng-template>
+                  </ng-container>
+                  </nz-drawer>
                 </nz-list-item>
                 <nz-list-item>
                   <a (click)="logout()">Logout</a>
@@ -69,8 +191,8 @@
               nzType="default"
               nzShape="circle"
               nz-popover
-              nzPopoverTitle="User"
-              [(nzPopoverVisible)]="drawerVisible"
+              [nzPopoverTitle]="this.menuTitle"
+              [(nzPopoverVisible)]="popoverVisible"
               nzPopoverTrigger="click"
               [nzPopoverContent]="contentTemplate"
               nzPopoverPlacement="bottomRight"
