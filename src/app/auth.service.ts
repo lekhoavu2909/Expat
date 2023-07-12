@@ -92,7 +92,7 @@ export class AuthService {
   getSettings(apiName: string){
     return this.apiService.getSettings(apiName).pipe(
       tap((response: any) => {
-        console.log(response)
+        localStorage.setItem(apiName, JSON.stringify(response))
       })
     );
   }

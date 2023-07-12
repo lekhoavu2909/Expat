@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { tap } from 'rxjs';
+import { AuthService } from 'src/app/auth.service';
 
 interface ItemData {
   id: string;
@@ -37,75 +39,12 @@ export class CandidateListComponent implements OnInit {
       isLeaf: true
     }
   ];
+  
+  stackOptions = [];
 
-  stackOptions = [
-    {
-      value: 'Front-end',
-      label: 'Front-end',
-      isLeaf: true
-    },
-    {
-      value: 'Back-end',
-      label: 'Back-end',
-      isLeaf: true
-    },
-    {
-      value: 'Full-stack',
-      label: 'Full-stack',
-      isLeaf: true
-    }
-  ];
+  experienceOptions = [];
 
-  experienceOptions = [
-    {
-      value: 'Fresher',
-      label: 'Fresher',
-      isLeaf: true
-    },
-    {
-      value: 'Junior',
-      label: 'Junior',
-      isLeaf: true
-    },
-    {
-      value: 'Middle',
-      label: 'Middle',
-      isLeaf: true
-    },
-    {
-      value: 'Senior',
-      label: 'Senior',
-      isLeaf: true
-    }
-  ];
-
-  skillNodes = [
-    {
-      title: 'HTML',
-      key: 'HTML',
-      isLeaf: true
-    },
-    {
-      title: 'CSS',
-      key: 'CSS',
-      isLeaf: true
-    },
-    {
-      title: 'JavaScript',
-      key: 'JavaScript',
-      isLeaf: true
-    },
-    {
-      title: 'Python',
-      key: 'Python',
-      isLeaf: true
-    },
-    {
-      title: 'Java',
-      key: 'Java',
-      isLeaf: true
-    },
-  ]
+  skillNodes = [];
 
   startEdit(id: string): void {
     this.updateEditCache();
@@ -132,7 +71,60 @@ export class CandidateListComponent implements OnInit {
     this.editVisible = false;
   }
   
-  constructor(private fb: UntypedFormBuilder) {}
+  constructor(private fb: UntypedFormBuilder, private authService: AuthService) {}
+
+  getSettings(){
+    this.authService.getSettings('Stack').pipe(
+      tap((response: any) => {
+        const stackString = localStorage.getItem('Stack');
+        const stackOptions = stackString ? JSON.parse(stackString) : {};
+
+
+        for(let i = 0; i<stackOptions.length; i++){
+          stackOptions[i]['isLeaf'] = true;
+          stackOptions[i]['label'] = stackOptions[i]['name'];
+          stackOptions[i]['key'] = stackOptions[i]['name'];
+        }
+
+        this.stackOptions = stackOptions;
+      })
+    ).subscribe();
+
+    this.authService.getSettings('Experience').pipe(
+      tap((response: any) => {
+        console.log(response)
+
+        const experienceString = localStorage.getItem('Experience');
+        const experienceOptions = experienceString ? JSON.parse(experienceString) : {};
+
+        for(let i = 0; i<experienceOptions.length; i++){
+          experienceOptions[i]['isLeaf'] = true;
+          experienceOptions[i]['label'] = experienceOptions[i]['level'];
+          experienceOptions[i]['key'] = experienceOptions[i]['level'];
+        }
+
+        console.log(experienceOptions)
+
+        this.experienceOptions = experienceOptions;
+      })
+    ).subscribe();
+
+    this.authService.getSettings('Skill').pipe(
+      tap((response: any) => {
+        const skillString = localStorage.getItem('Skill');
+        const skillNodes = skillString ? JSON.parse(skillString) : {};
+
+        for(let i = 0; i<skillNodes.length; i++){
+          skillNodes[i]['isLeaf'] = true;
+          skillNodes[i]['title'] = skillNodes[i]['name'];
+          skillNodes[i]['key'] = skillNodes[i]['name'];
+        }
+
+        this.skillNodes = skillNodes;
+      })
+    ).subscribe();
+  }
+
 
   updateEditCache(): void {
     this.listOfData.forEach(item => {
@@ -199,6 +191,7 @@ export class CandidateListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getSettings()
     this.updateEditCache();
     this.inputGroup = this.fb.group({
       Name: [null],
@@ -209,5 +202,7 @@ export class CandidateListComponent implements OnInit {
       Skills: [[]],
       Note: [null]
     });
+
+    console.log(this.experienceOptions)
   }
 }

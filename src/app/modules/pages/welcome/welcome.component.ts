@@ -112,6 +112,7 @@ export class WelcomeComponent extends UnsubscriptionComponent implements OnInit 
     this.onUpload = true
   };
 
+
   ngOnInit() {
     this.changePasswordForm = this.fb.group({
       username: localStorage.getItem('username'),
