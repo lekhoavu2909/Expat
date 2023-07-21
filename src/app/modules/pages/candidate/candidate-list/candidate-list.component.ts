@@ -18,16 +18,18 @@ export class CandidateListComponent implements OnInit {
 
   genderOptions = [
     {
-      value: 'Male',
-      label: 'Male',
-      isLeaf: true
-    },
-    {
       value: 'FeMale',
       label: 'Female',
       isLeaf: true
+    },
+    {
+      value: 'Male',
+      label: 'Male',
+      isLeaf: true
     }
   ];
+
+  modalVisible = false;
   
   stackOptions = [];
 
@@ -167,6 +169,14 @@ export class CandidateListComponent implements OnInit {
     });
   }
 
+  showSkill(): void {
+    this.modalVisible = true;
+  }
+
+  handleModal(): void {
+    this.modalVisible = false;
+  }
+
   handleCancel(): void {
     this.isVisible = false;
     this.editVisible = false;
@@ -178,11 +188,14 @@ export class CandidateListComponent implements OnInit {
       tap((res) => {
         localStorage.setItem('Candidates', JSON.stringify(res));
         const CandString = localStorage.getItem('Candidates')
+        console.log(CandString)
         this.listOfData = CandString ? JSON.parse(CandString) : {}
+        console.log(this.listOfData)
         this.updateEditCache();
       })
     ).subscribe();
-    this.inputGroup = this.fb.group({
+      console.log(this.listOfData)
+      this.inputGroup = this.fb.group({
       Name: [null],
       Gender: [null],
       InterviewDate: [null],

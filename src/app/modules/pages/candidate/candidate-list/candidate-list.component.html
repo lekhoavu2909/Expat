@@ -119,8 +119,31 @@
       <td>{{ data.gender }}</td>
       <td>{{ data.interviewDate }}</td>
       <td>{{ data.stack.name }}</td>
-      <td>{{ data.skillSet }}</td>
-      <td>{{ data.experience }}</td>
+      <td>
+        <button nz-button [nzType]="'default'" (click)="showSkill()"><span>Show Skills</span></button>
+        <nz-modal [(nzVisible)]="modalVisible" nzTitle="Skills" (nzOnOk)="handleModal()" (nzOnCancel)="handleModal()">
+          <ng-container *nzModalContent>
+            <nz-table
+              #editRowTable
+              nzBordered
+              [nzData]="data.skillSet"
+              class="data-table"
+            >
+            <thead>
+              <tr>
+                <th nzWidth="100%">Skills</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of editRowTable.data">
+                <td>{{ data.name }}</td>
+              </tr>
+            </tbody>
+            </nz-table>
+          </ng-container>
+        </nz-modal>
+      </td>
+      <td>{{ data.experience.level }}</td>
       <td>{{ data.note }}</td>
       <td>
         <a (click)="startEdit(data.id)" class="edit">Edit</a>
