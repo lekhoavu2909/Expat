@@ -186,4 +186,12 @@ export class AuthService {
       })
     ).subscribe();
   }
+
+  getCandidates(){
+    return this.apiService.getCandidates().pipe(
+      tap((res) => {
+        
+      })
+    )
+  }
 }

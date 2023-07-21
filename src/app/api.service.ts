@@ -79,4 +79,8 @@ export class ApiService {
   deleteSkill(id: number){
     return this.http.delete(this.ROOT_URL + '/api/Skill/' + id)
   }
+
+  getCandidates(){
+    return this.http.get(this.ROOT_URL + '/api/Candidate/');
+  }
 }

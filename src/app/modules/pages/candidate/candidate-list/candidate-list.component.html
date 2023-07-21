@@ -115,11 +115,11 @@
   </thead>
   <tbody>
     <tr *ngFor="let data of editRowTable.data">
-      <td>{{ data.name }}</td>
+      <td>{{ data.fullName }}</td>
       <td>{{ data.gender }}</td>
       <td>{{ data.interviewDate }}</td>
-      <td>{{ data.stack }}</td>
-      <td>{{ data.skills }}</td>
+      <td>{{ data.stack.name }}</td>
+      <td>{{ data.skillSet }}</td>
       <td>{{ data.experience }}</td>
       <td>{{ data.note }}</td>
       <td>
@@ -142,7 +142,7 @@
                         formControlName="Name" 
                         id="Name" 
                         placeholder="Candidate Name"
-                        [(ngModel)]="this.editCache[data.id].data.name"
+                        [(ngModel)]="this.editCache[data.id].data.fullName"
                       />
                   </nz-form-control>
               </nz-form-item>
@@ -178,7 +178,7 @@
                         formControlName="Stack" 
                         id="Stack" 
                         [nzOptions]="stackOptions" 
-                        [(ngModel)]="this.editCache[data.id].data.stack"
+                        [(ngModel)]="this.editCache[data.id].data.stack.name"
                       />
                   </nz-form-control>
               </nz-form-item>
@@ -194,7 +194,7 @@
                         nzPlaceHolder="Please select"
                         formControlName="Skills"
                         id="Skills"
-                        [(ngModel)]="this.editCache[data.id].data.skills"
+                        [(ngModel)]="this.editCache[data.id].data.skillSet"
                       />
                   </nz-form-control>
               </nz-form-item>
@@ -207,7 +207,7 @@
                         formControlName="Experience" 
                         id="Experience" 
                         [nzOptions]="experienceOptions" 
-                        [(ngModel)]="this.editCache[data.id].data.experience"
+                        [(ngModel)]="this.editCache[data.id].data.experience.level"
                       />
                   </nz-form-control>
               </nz-form-item>
