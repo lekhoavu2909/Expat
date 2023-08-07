@@ -62,7 +62,6 @@ export class StacksComponent implements OnInit {
   deleteRow(id: number): void {
     this.authService.deleteStack(id);
     this.listOfData = this.listOfData.filter((d:any) => d.id !== id);
-    console.log(id);
     this.updateEditCache();
   }
 
@@ -71,7 +70,6 @@ export class StacksComponent implements OnInit {
       tap((res)  => {
         localStorage.setItem('Stack', JSON.stringify(res));
         const JString = localStorage.getItem('Stack')
-        console.log(JString)
         this.listOfData = JString ? JSON.parse(JString) : {}
         this.updateEditCache();
       })

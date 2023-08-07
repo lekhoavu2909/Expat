@@ -85,7 +85,6 @@ export class AuthService {
     return this.apiService.getUser(localStorage.getItem('username')).pipe(
       tap((response: any) => {
         localStorage.setItem('user', JSON.stringify(response))
-        console.log(localStorage.getItem('username'))
     }))
   }
 
@@ -191,6 +190,14 @@ export class AuthService {
     return this.apiService.getCandidates().pipe(
       tap((res) => {
         
+      })
+    )
+  }
+
+  addCandidates(data: any){
+    return this.apiService.addCandidates(data).pipe(
+      tap((res) => {
+        window.location.reload;
       })
     )
   }

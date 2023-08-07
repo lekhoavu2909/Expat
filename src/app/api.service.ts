@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Login, Signup, User, changePassword } from "../app/modules/auth/login/post.model";
+import { Candidate, Login, Signup, User, changePassword } from "../app/modules/auth/login/post.model";
 
 export interface Post {
     "email": string,
@@ -82,5 +82,9 @@ export class ApiService {
 
   getCandidates(){
     return this.http.get(this.ROOT_URL + '/api/Candidate/');
+  }
+
+  addCandidates(data: Candidate){
+    return this.http.post(this.ROOT_URL + '/api/Candidate', data);
   }
 }

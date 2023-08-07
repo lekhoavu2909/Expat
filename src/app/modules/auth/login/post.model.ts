@@ -33,9 +33,18 @@ export interface User {
     photos: Photo[]
 }
 
-
 export interface Photo{
     id: number,
     url: string,
     isMain: boolean
   }
+
+  export interface Candidate {
+    fullName: string,
+    gender: string,
+    interviewDate: string,
+    stackId: number,
+    skills: string,
+    experienceId: number,
+    note: string
+}

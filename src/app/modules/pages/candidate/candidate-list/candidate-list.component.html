@@ -9,98 +9,6 @@
 >
   <thead>
     <button nz-button nzType="primary" (click)="showModal()">Add</button>
-      <nz-drawer
-        [nzBodyStyle]="{ overflow: 'auto' }"
-        [nzMaskClosable]="false"
-        [nzWidth]="720"
-        [nzVisible]="isVisible"
-        nzTitle="Create"
-        (nzOnClose)="handleCancel()"
-      >
-        <ng-container *nzDrawerContent>
-          <form nz-form [formGroup]="inputGroup">
-            <nz-form-item>
-                <nz-form-label  [nzSm]="8" [nzXs]="24" nzRequired nzFor="Name">Candidate Name</nz-form-label>
-                <nz-form-control [nzSm]="16" [nzXs]="24">
-                    <input 
-                        nz-input 
-                        nzAllowClear 
-                        formControlName="Name" 
-                        id="Name" 
-                        placeholder="Candidate Name"
-                    />
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-label  [nzSm]="8" [nzXs]="24" nzFor="Gender">Gender</nz-form-label>
-                <nz-form-control [nzSm]="16" [nzXs]="24">
-                    <nz-cascader 
-                        nz-input 
-                        nzAllowClear 
-                        formControlName="Gender" 
-                        id="Gender" 
-                        [nzOptions]="genderOptions" 
-                    />
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="InterviewDate">Interview Date</nz-form-label>
-                <nz-form-control [nzSm]="16" [nzXs]="24">
-                    <nz-date-picker 
-                        nz-input  
-                        formControlName="InterviewDate"
-                    />
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="Stack">Stack</nz-form-label>
-                <nz-form-control [nzSm]="16" [nzXs]="24">
-                    <nz-cascader 
-                        nz-input 
-                        nzAllowClear 
-                        formControlName="Stack" 
-                        id="Stack" 
-                        [nzOptions]="stackOptions" 
-                    />
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-label  [nzSm]="8" [nzXs]="24" nzFor="Skills">Skills</nz-form-label>
-                <nz-form-control [nzSm]="16" [nzXs]="24">
-                    <nz-tree-select
-                      nz-input
-                      [nzNodes]="skillNodes"
-                      nzShowSearch
-                      nzCheckable
-                      nzAllowClear
-                      nzPlaceHolder="Please select"
-                      formControlName="Skills"
-                      id="Skills"
-                    />
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-label  [nzSm]="8" [nzXs]="24" nzFor="Experience">Experience</nz-form-label>
-                <nz-form-control [nzSm]="16" [nzXs]="24">
-                    <nz-cascader 
-                      nz-input 
-                      nzAllowClear 
-                      formControlName="Experience" 
-                      id="Experience" 
-                      [nzOptions]="experienceOptions" 
-                    />
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-label  [nzSm]="8" [nzXs]="24" nzFor="Note">Note</nz-form-label>
-                <nz-form-control [nzSm]="16" [nzXs]="24">
-                    <textarea nz-input nzAllowClear formControlName="Note" id="Note" placeholder="Notes" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>        
-                </nz-form-control>
-            </nz-form-item>
-            <button nz-button nzType="primary" (click)="submitForm()">Submit</button>
-        </form>
-      </ng-container>
-    </nz-drawer>
     <tr>
       <th nzWidth="30%">Candidate</th>
       <th nzWidth="5%">Gender</th>
@@ -114,99 +22,93 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let data of editRowTable.data">
-      <td>{{ data.fullName }}</td>
-      <td>{{ data.gender }}</td>
-      <td>{{ data.interviewDate }}</td>
-      <td>{{ data.stack.name }}</td>
-      <td>
-        <button nz-button [nzType]="'default'" (click)="showSkill()"><span>Show Skills</span></button>
+    <tr *ngFor="let cand of editRowTable.data">
+      <td>{{ cand.fullName }}</td>
+      <td>{{ cand.gender }}</td>
+      <td>{{ cand.interviewDate }}</td>
+      <td>{{ cand.stack.name }}</td>
+      <td>{{ cand.skills }}</td>
+        <!-- <button nz-button [nzType]="'default'" (click)="showSkill()"><span>Show Skills</span></button>
         <nz-modal [(nzVisible)]="modalVisible" nzTitle="Skills" (nzOnOk)="handleModal()" (nzOnCancel)="handleModal()">
           <ng-container *nzModalContent>
             <nz-table
-              #editRowTable
+              #middleTable
               nzBordered
-              [nzData]="data.skillSet"
+              [nzData]="cand.skillSet"
               class="data-table"
             >
-            <thead>
-              <tr>
-                <th nzWidth="100%">Skills</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let data of editRowTable.data">
-                <td>{{ data.name }}</td>
-              </tr>
-            </tbody>
+              <tbody>
+                <tr *ngFor="let skill of middleTable.data">
+                  <td>{{ skill.id }}</td>
+                </tr>
+              </tbody>
             </nz-table>
           </ng-container>
-        </nz-modal>
-      </td>
-      <td>{{ data.experience.level }}</td>
-      <td>{{ data.note }}</td>
+        </nz-modal> -->
+      <td>{{ cand.experience.level }}</td>
+      <td>{{ cand.note }}</td>
       <td>
-        <a (click)="startEdit(data.id)" class="edit">Edit</a>
+        <a (click)="startEdit(cand.id)" class="edit">Edit</a>
         <nz-drawer 
           [nzBodyStyle]="{ overflow: 'auto' }"
           [nzMaskClosable]="false"
           [nzWidth]="720"
           [nzVisible]="editVisible"
           nzTitle="Create"
-          (nzOnClose)="cancelEdit(data.id)">
+          (nzOnClose)="cancelEdit(cand.id)">
           <ng-container *nzDrawerContent>
-            <form nz-form [formGroup]="inputGroup">
+            <form [formGroup]="inputGroup">
               <nz-form-item>
-                  <nz-form-label  [nzSm]="8" [nzXs]="24" nzRequired nzFor="Name">Candidate Name</nz-form-label>
+                  <nz-form-label  [nzSm]="8" [nzXs]="24" nzRequired nzFor="fullName">Candidate Name</nz-form-label>
                   <nz-form-control [nzSm]="16" [nzXs]="24">
-                      <input 
-                        nz-input 
-                        nzAllowClear 
-                        formControlName="Name" 
-                        id="Name" 
-                        placeholder="Candidate Name"
-                        [(ngModel)]="this.editCache[data.id].data.fullName"
-                      />
+                    <input 
+                      nz-input 
+                      nzAllowClear 
+                      formControlName="fullName" 
+                      id="fullName" 
+                      placeholder="Candidate Name"
+                      [(ngModel)]="this.editCache[cand.id].data.fullName"
+                    />
                   </nz-form-control>
               </nz-form-item>
               <nz-form-item>
-                  <nz-form-label  [nzSm]="8" [nzXs]="24" nzFor="Gender">Gender</nz-form-label>
+                  <nz-form-label  [nzSm]="8" [nzXs]="24" nzFor="gender">Gender</nz-form-label>
                   <nz-form-control [nzSm]="16" [nzXs]="24">
-                      <nz-cascader 
-                        nz-input 
-                        nzAllowClear 
-                        formControlName="Gender" 
-                        id="Gender" 
-                        [nzOptions]="genderOptions" 
-                        [(ngModel)]="this.editCache[data.id].data.gender"
-                      />
+                    <nz-cascader 
+                      nz-input 
+                      nzAllowClear 
+                      formControlName="gender" 
+                      id="gender" 
+                      [nzOptions]="genderOptions" 
+                      [(ngModel)]="this.editCache[cand.id].data.gender"
+                    />
                   </nz-form-control>
               </nz-form-item>
               <nz-form-item>
-                  <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="InterviewDate">Interview Date</nz-form-label>
+                  <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="interviewDate">Interview Date</nz-form-label>
                   <nz-form-control [nzSm]="16" [nzXs]="24">
-                      <nz-date-picker 
-                        nz-input  
-                        formControlName="InterviewDate"
-                        [(ngModel)]="this.editCache[data.id].data.interviewDate"
-                      />
+                    <nz-date-picker 
+                      nz-input  
+                      formControlName="interviewDate"
+                      [(ngModel)]="this.editCache[cand.id].data.interviewDate"
+                    />
                   </nz-form-control>
               </nz-form-item>
               <nz-form-item>
-                  <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="Stack">Stack</nz-form-label>
+                  <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="stackId">Stack</nz-form-label>
                   <nz-form-control [nzSm]="16" [nzXs]="24">
-                      <nz-cascader 
-                        nz-input 
-                        nzAllowClear 
-                        formControlName="Stack" 
-                        id="Stack" 
-                        [nzOptions]="stackOptions" 
-                        [(ngModel)]="this.editCache[data.id].data.stack.name"
-                      />
+                    <nz-cascader 
+                      nz-input 
+                      nzAllowClear 
+                      formControlName="stackId" 
+                      id="stackId" 
+                      [nzOptions]="stackOptions" 
+                      [(ngModel)]="this.editCache[cand.id].data.stack.name"
+                    />
                   </nz-form-control>
               </nz-form-item>
               <nz-form-item>
-                  <nz-form-label  [nzSm]="8" [nzXs]="24" nzFor="Skills">Skills</nz-form-label>
+                  <nz-form-label  [nzSm]="8" [nzXs]="24" nzFor="skills">Skills</nz-form-label>
                   <nz-form-control [nzSm]="16" [nzXs]="24">
                       <nz-tree-select
                         nz-input
@@ -215,47 +117,141 @@
                         nzCheckable
                         nzAllowClear
                         nzPlaceHolder="Please select"
-                        formControlName="Skills"
-                        id="Skills"
-                        [(ngModel)]="this.editCache[data.id].data.skillSet"
+                        formControlName="skills"
+                        id="skills"
+                        [(ngModel)]="this.editCache[cand.id].data.skills"
                       />
                   </nz-form-control>
               </nz-form-item>
               <nz-form-item>
-                  <nz-form-label  [nzSm]="8" [nzXs]="24" nzFor="Experience">Experience</nz-form-label>
+                  <nz-form-label  [nzSm]="8" [nzXs]="24" nzFor="experienceId">Experience</nz-form-label>
                   <nz-form-control [nzSm]="16" [nzXs]="24">
                       <nz-cascader 
                         nz-input 
                         nzAllowClear 
-                        formControlName="Experience" 
-                        id="Experience" 
+                        formControlName="experienceId" 
+                        id="experienceId" 
                         [nzOptions]="experienceOptions" 
-                        [(ngModel)]="this.editCache[data.id].data.experience.level"
+                        [(ngModel)]="this.editCache[cand.id].data.experienceId"
                       />
                   </nz-form-control>
               </nz-form-item>
               <nz-form-item>
-                  <nz-form-label  [nzSm]="8" [nzXs]="24" nzFor="Note">Note</nz-form-label>
+                  <nz-form-label  [nzSm]="8" [nzXs]="24" nzFor="note">Note</nz-form-label>
                   <nz-form-control [nzSm]="16" [nzXs]="24">
                       <textarea 
                         nz-input 
                         nzAllowClear 
-                        formControlName="Note" 
-                        id="Note" 
+                        formControlName="note" 
+                        id="note" 
                         placeholder="Notes" 
                         [nzAutosize]="{ minRows: 3, maxRows: 5 }"
-                        [(ngModel)]="this.editCache[data.id].data.note"
+                        [(ngModel)]="this.editCache[cand.id].data.note"
                       ></textarea>        
                   </nz-form-control>
               </nz-form-item>
-              <button nz-button nzType="primary" (click)="saveEdit(data.id)">Save</button>
+              <button nz-button nzType="primary" (click)="saveEdit(cand.id)">Save</button>
           </form>
           </ng-container>
         </nz-drawer>
       </td>
       <td>
-        <a (click)="deleteRow(data.id)" class="delete">Delete</a>
+        <a (click)="deleteRow(cand.id)" class="delete">Delete</a>
       </td>
     </tr>
+    <nz-drawer
+        [nzBodyStyle]="{ overflow: 'auto' }"
+        [nzMaskClosable]="false"
+        [nzWidth]="720"
+        [nzVisible]="isVisible"
+        nzTitle="Create"
+        (nzOnClose)="handleCancel()"
+      >
+        <ng-container *nzDrawerContent>
+          <form nz-form [formGroup]="inputGroup" (ngSubmit)="submitForm()">
+            <nz-form-item>
+                <nz-form-label  [nzSm]="8" [nzXs]="24" nzRequired nzFor="fullName">Candidate Name</nz-form-label>
+                <nz-form-control [nzSm]="16" [nzXs]="24">
+                    <input 
+                        nz-input 
+                        nzAllowClear 
+                        formControlName="fullName" 
+                        id="fullName" 
+                        placeholder="Candidate Name"
+                    />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label  [nzSm]="8" [nzXs]="24" nzFor="gender">Gender</nz-form-label>
+                <nz-form-control [nzSm]="16" [nzXs]="24">
+                    <nz-cascader 
+                        nz-input 
+                        nzAllowClear 
+                        formControlName="gender" 
+                        id="gender" 
+                        [nzOptions]="genderOptions" 
+                    />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="interviewDate">Interview Date</nz-form-label>
+                <nz-form-control [nzSm]="16" [nzXs]="24">
+                    <nz-date-picker 
+                        nz-input  
+                        formControlName="interviewDate"
+                    />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="stackId">Stack</nz-form-label>
+                <nz-form-control [nzSm]="16" [nzXs]="24">
+                  <nz-tree-select
+                    nzPlaceHolder="Please select"
+                    nzShowSearch
+                    allowClear
+                    formControlName="stackId"
+                    id="experienceId"
+                    [nzNodes]="stackOptions"   
+                  />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label  [nzSm]="8" [nzXs]="24" nzFor="skills">Skills</nz-form-label>
+                <nz-form-control [nzSm]="16" [nzXs]="24">
+                    <nz-tree-select
+                      nz-input
+                      [nzNodes]="skillNodes"
+                      nzShowSearch
+                      nzCheckable
+                      nzAllowClear
+                      nzPlaceHolder="Please select"
+                      formControlName="skills"
+                      id="skills"
+                    />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label  [nzSm]="8" [nzXs]="24" nzFor="experienceId">Experience</nz-form-label>
+                <nz-form-control [nzSm]="16" [nzXs]="24">
+                    <nz-tree-select
+                      nzPlaceHolder="Please select"
+                      nzShowSearch
+                      allowClear
+                      formControlName="experienceId"
+                      id="experienceId"
+                      [nzNodes]="experienceOptions"   
+                    />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label  [nzSm]="8" [nzXs]="24" nzFor="note">Note</nz-form-label>
+                <nz-form-control [nzSm]="16" [nzXs]="24">
+                    <textarea nz-input nzAllowClear formControlName="note" id="note" placeholder="Notes" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>        
+                </nz-form-control>
+            </nz-form-item>
+            <button nz-button nzType="primary">Submit</button>
+        </form>
+      </ng-container>
+    </nz-drawer>
   </tbody>
 </nz-table>

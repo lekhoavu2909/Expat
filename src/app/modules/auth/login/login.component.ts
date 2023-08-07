@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
 
   submitForm(): void {
     if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
       const loginData = this.validateForm.value;
       this.accService.login(loginData)
     } else {
