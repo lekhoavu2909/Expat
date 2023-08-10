@@ -27,28 +27,12 @@
       <td>{{ cand.gender }}</td>
       <td>{{ cand.interviewDate }}</td>
       <td>{{ cand.stack.name }}</td>
-      <td>{{ cand.skills }}</td>
-        <!-- <button nz-button [nzType]="'default'" (click)="showSkill()"><span>Show Skills</span></button>
-        <nz-modal [(nzVisible)]="modalVisible" nzTitle="Skills" (nzOnOk)="handleModal()" (nzOnCancel)="handleModal()">
-          <ng-container *nzModalContent>
-            <nz-table
-              #middleTable
-              nzBordered
-              [nzData]="cand.skillSet"
-              class="data-table"
-            >
-              <tbody>
-                <tr *ngFor="let skill of middleTable.data">
-                  <td>{{ skill.id }}</td>
-                </tr>
-              </tbody>
-            </nz-table>
-          </ng-container>
-        </nz-modal> -->
+      <td>{{ cand.skills }}
+      </td>
       <td>{{ cand.experience.level }}</td>
       <td>{{ cand.note }}</td>
       <td>
-        <a (click)="startEdit(cand.id)" class="edit">Edit</a>
+        <a (click)="startEdit(cand.id)" class="edit"><span nz-icon nzType="edit" nzTheme="outline"></span></a>
         <nz-drawer 
           [nzBodyStyle]="{ overflow: 'auto' }"
           [nzMaskClosable]="false"
@@ -67,7 +51,6 @@
                       formControlName="fullName" 
                       id="fullName" 
                       placeholder="Candidate Name"
-                      [(ngModel)]="this.editCache[cand.id].data.fullName"
                     />
                   </nz-form-control>
               </nz-form-item>
@@ -80,7 +63,6 @@
                       formControlName="gender" 
                       id="gender" 
                       [nzOptions]="genderOptions" 
-                      [(ngModel)]="this.editCache[cand.id].data.gender"
                     />
                   </nz-form-control>
               </nz-form-item>
@@ -90,7 +72,6 @@
                     <nz-date-picker 
                       nz-input  
                       formControlName="interviewDate"
-                      [(ngModel)]="this.editCache[cand.id].data.interviewDate"
                     />
                   </nz-form-control>
               </nz-form-item>
@@ -103,7 +84,6 @@
                       formControlName="stackId" 
                       id="stackId" 
                       [nzOptions]="stackOptions" 
-                      [(ngModel)]="this.editCache[cand.id].data.stack.name"
                     />
                   </nz-form-control>
               </nz-form-item>
@@ -119,7 +99,6 @@
                         nzPlaceHolder="Please select"
                         formControlName="skills"
                         id="skills"
-                        [(ngModel)]="this.editCache[cand.id].data.skills"
                       />
                   </nz-form-control>
               </nz-form-item>
@@ -132,7 +111,6 @@
                         formControlName="experienceId" 
                         id="experienceId" 
                         [nzOptions]="experienceOptions" 
-                        [(ngModel)]="this.editCache[cand.id].data.experienceId"
                       />
                   </nz-form-control>
               </nz-form-item>
@@ -146,7 +124,6 @@
                         id="note" 
                         placeholder="Notes" 
                         [nzAutosize]="{ minRows: 3, maxRows: 5 }"
-                        [(ngModel)]="this.editCache[cand.id].data.note"
                       ></textarea>        
                   </nz-form-control>
               </nz-form-item>
@@ -156,7 +133,7 @@
         </nz-drawer>
       </td>
       <td>
-        <a (click)="deleteRow(cand.id)" class="delete">Delete</a>
+        <a (click)="deleteRow(cand.id)" class="delete"><span nz-icon nzType="delete" nzTheme="outline"></span></a>
       </td>
     </tr>
     <nz-drawer

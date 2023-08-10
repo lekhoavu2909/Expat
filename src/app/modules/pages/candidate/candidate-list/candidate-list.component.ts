@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
-import { FormGroup, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { tap } from 'rxjs';
 import { AuthService } from 'src/app/auth.service';
 import { Candidate } from 'src/app/modules/auth/login/post.model';
@@ -36,6 +36,17 @@ export class CandidateListComponent implements OnInit {
   startEdit(id: string): void {
     this.updateEditCache();
     this.editCache[id].edit = true;
+    this.inputGroup.patchValue({
+      id: this.editCache[id].data.id,
+      fullName: this.editCache[id].data.fullName,
+      gender: this.editCache[id].data.gender,
+      interviewDate: this.editCache[id].data.interviewDate,
+      stackId: this.editCache[id].data.stack.name,
+      skills: this.editCache[id].data.skills.split(", "),
+      experienceId: this.editCache[id].data.experience.level,
+      note: this.editCache[id].data.note,
+    });
+    console.log(this.inputGroup.value.id);
     this.editVisible = true
   }
 
@@ -49,17 +60,15 @@ export class CandidateListComponent implements OnInit {
   }
 
   saveEdit(id: string): void {
-    const index = this.listOfData.findIndex((item:any) => item.id === id);
-    if(this.editCache[id].data.interviewDate !== null){
-      this.editCache[id].data.interviewDate = new Date(this.editCache[id].data.interviewDate).toLocaleDateString()
-    }
-    Object.assign(this.listOfData[index], this.editCache[id].data);
+    this.authService.addCandidates(this.inputGroup.value).pipe(
+      tap((res) => {
+        console.log(res);
+      })).subscribe()
     this.editCache[id].edit = false;
     this.editVisible = false;
   }
   
   constructor(private fb: UntypedFormBuilder, private authService: AuthService, private changeDetector: ChangeDetectorRef) {
-    // this.createForm()
   }
 
   updateEditCache(): void {
@@ -73,18 +82,17 @@ export class CandidateListComponent implements OnInit {
 
   submitForm(): void {
     this.inputGroup.value['skills'] = JSON.stringify(this.inputGroup.value['skills']);
-    // this.inputGroup.value['interviewDate'] = this.inputGroup.value['interviewDate'].toLocaleDateString();
-    this.inputGroup.value['interviewDate'] = "2023-08-07T04:26:55.218Z";
     this.inputGroup.value['gender'] = this.inputGroup.value['gender'][0];
-
+    this.inputGroup.value['id'] = 0;
     const data : Candidate = this.inputGroup.value
     
-    this.authService.addCandidates(data).pipe(
-      tap((res) => {
-        console.log(res);
-      })).subscribe()
+    console.log(data)
 
-    // this.createForm()
+    // this.authService.addCandidates(data).pipe(
+    //   tap((res) => {
+    //     console.log(res);
+    //   })).subscribe()
+
     this.updateEditCache();
     this.handleCancel()
   }
@@ -106,19 +114,19 @@ export class CandidateListComponent implements OnInit {
 
   showModal(): void {
     this.handleCancel()
-    this.updateEditCache();
-    this.isVisible = true;
     this.createForm()
+    this.isVisible = true;
   }
 
   createForm(){
     this.inputGroup = this.fb.group({
-      fullName: [null],
-      gender: [null],
+      id: 0,
+      fullName: [null, Validators.required],
+      gender: [null, Validators.required],
       interviewDate: [null],
       stackId: [null],
-      skills: [null],
-      experienceId: [null],
+      skills: [null, Validators.required],
+      experienceId: [null, Validators.required],
       note: [null]
     });
   }
@@ -137,12 +145,30 @@ export class CandidateListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.createForm()
     this.authService.getCandidates().pipe(
       tap((res) => {
         localStorage.setItem('Candidates', JSON.stringify(res));
         const CandString = localStorage.getItem('Candidates')
-        this.listOfData = CandString ? JSON.parse(CandString) : {}
+        const Cand = CandString ? JSON.parse(CandString) : {}
+        for(let i = 0; i < Cand.length; i++){
+          var skillsString = "";
+          for(let j = 0; j < Cand[i]['skillSet'].length; j++){
+            skillsString = skillsString+Cand[i]['skillSet'][j]['name']+", "
+          }
+          Cand[i]['skills'] = skillsString.substring(0, skillsString.length-2);
+          const date = new Date(Cand[i]['interviewDate'])
+          const dateFormatted = new Intl.DateTimeFormat("en-US", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit"
+          }).format(date);
+          Cand[i]['interviewDate'] = dateFormatted;
+        }
+
+        this.listOfData = Cand
         this.updateEditCache();
+        
       })
     ).subscribe();
 
@@ -182,6 +208,7 @@ export class CandidateListComponent implements OnInit {
 
         for(let i = 0; i<skillNodes.length; i++){
           skillNodes[i]['isLeaf'] = true;
+          skillNodes[i]['value'] = skillNodes[i]['name'];
           skillNodes[i]['title'] = skillNodes[i]['name'];
           skillNodes[i]['key'] = skillNodes[i]['id'];
         }
@@ -189,11 +216,9 @@ export class CandidateListComponent implements OnInit {
         this.skillNodes = skillNodes;
       })
     ).subscribe();
-
-    this.createForm()
   }
 
-  ngAfterContentChecked(): void {
-    this.changeDetector.detectChanges();
-  }
+  // ngAfterContentChecked(): void {
+  //   this.changeDetector.detectChanges();
+  // }
 }

@@ -40,6 +40,7 @@ export interface Photo{
   }
 
   export interface Candidate {
+    id: number,
     fullName: string,
     gender: string,
     interviewDate: string,

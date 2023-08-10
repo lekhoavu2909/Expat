@@ -85,6 +85,7 @@ export class ApiService {
   }
 
   addCandidates(data: Candidate){
+    console.log(data)
     return this.http.post(this.ROOT_URL + '/api/Candidate', data);
   }
 }
