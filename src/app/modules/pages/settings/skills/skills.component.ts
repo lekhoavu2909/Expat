@@ -62,7 +62,6 @@ export class SkillsComponent implements OnInit {
   deleteRow(id: number): void {
     this.authService.deleteSkill(id);
     this.listOfData = this.listOfData.filter((d:any) => d.id !== id);
-    console.log(id);
     this.updateEditCache();
   }
 
@@ -71,7 +70,6 @@ export class SkillsComponent implements OnInit {
       tap((res)  => {
         localStorage.setItem('Skill', JSON.stringify(res));
         const JString = localStorage.getItem('Skill')
-        console.log(JString)
         this.listOfData = JString ? JSON.parse(JString) : {}
         this.updateEditCache();
       })

@@ -18,6 +18,7 @@ import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @NgModule({
   imports: 
@@ -39,7 +40,8 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
     NzTreeSelectModule,
     NzDatePickerModule,
     NzModalModule,
-    NzDrawerModule
+    NzDrawerModule,
+    NzButtonModule
   ],
   declarations: [CandidateListComponent],
   exports: [CandidateListComponent]

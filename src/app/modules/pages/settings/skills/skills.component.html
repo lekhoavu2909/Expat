@@ -1,4 +1,3 @@
-<p>Skills</p>
 <nz-table
   #editRowTable
   nzBordered
@@ -33,7 +32,7 @@
       <ng-template #editTemplate>
         <td>
           <div class="editable-cell">
-            <input type="text" nz-input [(ngModel)]="editCache[data.id].data.name" />
+            <input type="text" nz-input [(ngModel)]="editCache[data.id].data.fullName" />
           </div>
         </td>
         <td>

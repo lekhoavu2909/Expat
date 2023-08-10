@@ -70,10 +70,8 @@ export class WelcomeComponent extends UnsubscriptionComponent implements OnInit 
     this.http.post('https://expat-api.azurewebsites.net/api/Users/add-photo', imageFormData, { observe: 'response' })
       .subscribe((response) => {
         if (response.status === 201) {
-          console.log(response)
           localStorage.setItem('photo', JSON.stringify(response))
           const photoString = JSON.stringify(response);
-          console.log(localStorage.getItem('photo'))
           const photo = photoString ? JSON.parse(photoString) : {}
           this.accService.savePhoto(photo.body.id);
           this.user.photoUrl = photo.body.url
@@ -84,7 +82,6 @@ export class WelcomeComponent extends UnsubscriptionComponent implements OnInit 
 
   submitForm(): void {
     if (this.changePasswordForm.valid) {
-      console.log('submit', this.changePasswordForm.value);
       const loginData = this.changePasswordForm.value;
       this.accService.changePassword(loginData).subscribe((response) => {
         this.changed = true
@@ -111,6 +108,7 @@ export class WelcomeComponent extends UnsubscriptionComponent implements OnInit 
   handleUpload() {
     this.onUpload = true
   };
+
 
   ngOnInit() {
     this.changePasswordForm = this.fb.group({

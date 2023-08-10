@@ -85,14 +85,13 @@ export class AuthService {
     return this.apiService.getUser(localStorage.getItem('username')).pipe(
       tap((response: any) => {
         localStorage.setItem('user', JSON.stringify(response))
-        console.log(localStorage.getItem('username'))
     }))
   }
 
   getSettings(apiName: string){
     return this.apiService.getSettings(apiName).pipe(
       tap((response: any) => {
-        console.log(response)
+        localStorage.setItem(apiName, JSON.stringify(response))
       })
     );
   }
@@ -185,5 +184,21 @@ export class AuthService {
         this.route.navigate(['/welcome/skill']);
       })
     ).subscribe();
+  }
+
+  getCandidates(){
+    return this.apiService.getCandidates().pipe(
+      tap((res) => {
+        
+      })
+    )
+  }
+
+  addCandidates(data: any){
+    return this.apiService.addCandidates(data).pipe(
+      tap((res) => {
+        window.location.reload;
+      })
+    )
   }
 }
